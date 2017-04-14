@@ -1,0 +1,29 @@
+{
+    "name": "keep_accounts/ka",
+    "description": "just keep accounts",
+    "minimum-stability": "dev",
+
+    "type": "project",
+    "keywords": [
+        "accounts",
+        "keep_accounts"
+    ],
+    "homepage": "http://www.keepaccounts.com/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "DM",
+            "email": "769245396@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "topthink/framework": "^5.0"
+    },
+    "extra": {
+        "think-path": "thinkphp"
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

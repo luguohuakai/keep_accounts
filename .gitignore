@@ -1,3 +1,7 @@
+.idea
+composer.lock
+*.log
+thinkphp
 *.dmb
 *.rsc
 *.int
