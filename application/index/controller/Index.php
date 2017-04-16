@@ -24,4 +24,7 @@ class Index
         </div>
         ';
     }
+    public function test(){
+        return view('index',['name'=>'maoge']);
+    }
 }
