@@ -1,9 +1,15 @@
 <?php
-namespace app\index\controller;
+namespace app\home\controller;
 
 class Index
 {
-    public function index()
+    // 空操作
+    public function _empty(){
+        return $this->_index();
+    }
+
+    // 空操作
+    public function _index()
     {
         return '
         <style>
@@ -24,7 +30,9 @@ class Index
         </div>
         ';
     }
-    public function test(){
-        return view('index',['name'=>'maoge']);
+
+    // 首页
+    public function index(){
+        return view('index',['title' => lang('Home')]);
     }
 }
