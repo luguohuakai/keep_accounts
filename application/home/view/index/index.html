@@ -1,218 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <title>{$title}</title>
-    <style>
-        *{margin-bottom: 0;padding:0;}
-        body{
-            background-image:linear-gradient(to right,#999,#eee);
-        }
-        .right{
-            float: right;}
-    </style>
-</head>
-<body>
-<!--导航条-->
-<nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Brand</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">{$title} <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-<!--左边栏菜单-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2 menu_left">
-            <div class="panel-group table-responsive" role="tablist">
-
-                <div class="panel panel-primary leftMenu">
-                    <!-- 利用data-target指定要折叠的分组列表 -->
-                    <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#" role="tab" >
-                        <h4 class="panel-title">
-                            仪表盘
-                        </h4>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 系统状态</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
                     </div>
                 </div>
-
-                <div class="panel panel-primary leftMenu">
-                    <!-- 利用data-target指定要折叠的分组列表 -->
-                    <div class="panel-heading" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#collapseListGroup1" role="tab" >
-                        <h4 class="panel-title">
-                            记一笔
-                            <span class="glyphicon glyphicon-chevron-up right"></span>
-                        </h4>
-                    </div>
-                    <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
-                    <div id="collapseListGroup1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <!-- 利用data-target指定URL -->
-                                <button class="menu-item-left" data-target="test2.html">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项1-1
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项1-2
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup2" role="tab" >
-                        <h4 class="panel-title">
-                            统计分析
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
-                        </h4>
-                    </div>
-                    <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项2-1
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项2-2
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
-                        <h4 class="panel-title">
-                            管理员中心
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
-                        </h4>
-                    </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项3-1
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项3-2
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="panel panel-primary leftMenu">
-                    <div class="panel-heading" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup4" role="tab" >
-                        <h4 class="panel-title">
-                            用户中心
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
-                        </h4>
-                    </div>
-                    <div id="collapseListGroup4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项4-1
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项4-2
-                                </button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
             </div>
         </div>
-        <div class="col-md-10 content_right" style="border: 1px solid red;">
-            内容
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 系统状态</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="jumbotron">
+                            <h1>Hello, world!</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script>
-    $(function(){
-        $(".panel-heading").click(function(e){
-            /*切换折叠指示图标*/
-            $(this).find("span").toggleClass("glyphicon-chevron-down");
-            $(this).find("span").toggleClass("glyphicon-chevron-up");
-        });
-        $(".navbar-brand").click(function (e) {
-            $(".menu_left").toggleClass('hidden');
-            $(".content_right").toggleClass('col-md-10').toggleClass('col-md-12');
-        })
-    });
-</script>
-<!--页脚-->
-<footer>
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container" style="text-align: center;">
-            <p style="padding-top: 18px;">©{:date('Y')} {:lang('keep_accounts')}</p>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 动态</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                </div>
+            </div>
         </div>
-    </nav>
-</footer>
-</body>
-</html>
+    </div>
+</div>
+
+<link rel="stylesheet" type="text/css" media="all" href="/assets/css/time_line.css">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 管理员登录日志</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="timeline">
+            <li><div class="tldate">Apr 2014</div></li>
+
+            <li>
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>Surprising Headline Right Here</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3 hours ago</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Lorem Ipsum and such.</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="timeline-inverted">
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>Breaking into Spring!</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 4/07/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Hope the weather gets a bit nicer...</p>
+
+                        <p>Y'know, with more sunlight.</p>
+                    </div>
+                </div>
+            </li>
+
+            <li><div class="tldate">Mar 2014</div></li>
+
+            <li>
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>New Apple Device Release Date</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/22/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>In memory of Steve Jobs.</p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>No icon here</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/16/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Here you'll find some beautiful photography for your viewing pleasure, courtesy of <a href="http://lorempixel.com/">lorempixel</a>.</p>
+
+                        <p><img src="http://lorempixel.com/600/300/nightlife/" alt="lorem pixel"></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>Some Important Date!</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/03/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Write up a quick summary of the event.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-panel noarrow">
+                    <div class="tl-heading">
+                        <h4>Secondary Timeline Box</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/01/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>This might be a follow-up post with related info. Maybe we include some extra links, tweets, user comments, photos, etc.</p>
+                    </div>
+                </div>
+            </li>
+
+            <li><div class="tldate">Feb 2014</div></li>
+
+            <li class="timeline-inverted">
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>The Winter Months</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 02/23/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Gee time really flies when you're having fun.</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="tl-circ"></div>
+                <div class="timeline-panel">
+                    <div class="tl-heading">
+                        <h4>Yeah we're pretty much done here</h4>
+                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 02/11/2014</small></p>
+                    </div>
+                    <div class="tl-body">
+                        <p>Wasn't this fun though?</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
