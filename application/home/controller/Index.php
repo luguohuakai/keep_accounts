@@ -36,6 +36,11 @@ class Index
         return view('index',['title' => lang('Home')]);
     }
 
+    // angularjs
+    public function angular(){
+        return view('angular');
+    }
+
     // 获取系统信息
     public function getSysInfo(){
         $command_arr = ['arch', 'uname', 'hostname'];

@@ -1,7 +1,7 @@
 {
     "name": "keep_accounts/ka",
     "description": "just keep accounts",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
 
     "type": "project",
     "keywords": [
