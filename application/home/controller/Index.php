@@ -35,4 +35,20 @@ class Index
     public function index(){
         return view('index',['title' => lang('Home')]);
     }
+
+    // 获取系统信息
+    public function getSysInfo(){
+        $command_arr = ['arch', 'uname', 'hostname'];
+
+        for($i=0; $i < count($command_arr); $i++) {
+            $system_msg[$command_arr[$i]] =exec($command_arr[$i]);
+        }
+        $system_msg['core'] = exec("grep 'core id' /proc/cpuinfo | sort -u | wc -l");
+        $system_msg['uname_r'] = exec("uname -r");
+        $system_msg['branch'] = exec("cat /etc/redhat-release");
+        $system_msg['version'] = exec("uname -r");
+        $system_msg['ip'] =$_SERVER['HTTP_HOST'];
+
+        return $system_msg;
+    }
 }
