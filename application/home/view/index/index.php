@@ -8,22 +8,17 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h4>Hello, world!</h4>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h4>Hello, world!</h4>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h4>Hello, world!</h4>
                         </div>
                     </div>
                 </div>
@@ -39,17 +34,17 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h3>Hello, world!</h3>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h3>Hello, world!</h3>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="jumbotron">
-                            <h1>Hello, world!</h1>
+                            <h3>Hello, world!</h3>
                         </div>
                     </div>
                 </div>
@@ -91,7 +86,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="/assets/css/time_line.css">
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 管理员登录日志</h3>
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 管理员日志</h3>
     </div>
     <div class="panel-body">
         <ul class="timeline">

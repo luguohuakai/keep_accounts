@@ -7,5 +7,5 @@
  */
 return [
     'Home' => '首页',
-    'keep_accounts' => '铁公鸡在线',
+    'keep_accounts' => '钱掌柜',
 ];
