@@ -1,5 +1,33 @@
 <?php
+    use think\Url;
+
     $title = $title ?? '^_^';
+
+    $ka_route = substr(str_replace('.html','',Url::build()),1);
+
+    // 仪表盘
+    $ka_bash = [
+        'home/index/index',
+    ];
+
+    // 记一笔
+    $ka_record = [
+        'home/account/record',
+    ];
+
+    // 统计分析
+    $ka_count = [
+        'home/count/index',
+    ];
+
+    // Demos选项卡
+    $ka_demos = [
+        'home/demo/showtable',
+        'home/demo/showform',
+        'home/demo/showmore',
+    ];
+//dump($ka_demos);
+//dump($ka_route);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,9 +129,9 @@
         <div class="col-md-2 menu_left">
             <div class="panel-group table-responsive" role="tablist">
 
-                <div class="panel panel-primary leftMenu">
+                <div class="panel panel-primary <?=in_array($ka_route,$ka_bash) ? 'panel-success' : ''?> leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
-                    <div class="panel-heading down_up" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#" role="tab" >
+                    <div class="panel-heading down_up" id="collapseListGroupHeading1" data-toggle="collapse" data-url="/home/index/index.html" role="tab" >
                         <h4 class="panel-title">
                             仪表盘
                         </h4>
@@ -115,11 +143,11 @@
                     <div class="panel-heading down_up" id="collapseListGroupHeading1" data-toggle="collapse" data-target="#collapseListGroup1" role="tab" >
                         <h4 class="panel-title">
                             记一笔
-                            <span class="glyphicon glyphicon-chevron-up right"></span>
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_record) ? 'up' : 'down'?> right"></span>
                         </h4>
                     </div>
                     <!-- .panel-collapse和.collapse标明折叠元素 .in表示要显示出来 -->
-                    <div id="collapseListGroup1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
+                    <div id="collapseListGroup1" class="panel-collapse collapse <?=in_array($ka_route,$ka_record) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <!-- 利用data-target指定URL -->
@@ -140,10 +168,10 @@
                     <div class="panel-heading down_up" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup2" role="tab" >
                         <h4 class="panel-title">
                             统计分析
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_count) ? 'up' : 'down'?> right"></span>
                         </h4>
                     </div>
-                    <div id="collapseListGroup2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                    <div id="collapseListGroup2" class="panel-collapse collapse <?=in_array($ka_route,$ka_count) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <button class="menu-item-left">
@@ -205,6 +233,40 @@
                     </div>
                 </div>
 
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading down_up" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup5" role="tab" >
+                        <h4 class="panel-title">
+                            Demos
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_demos) ? 'up' : 'down'?> right"></span>
+                        </h4>
+                    </div>
+                    <div id="collapseListGroup5" class="panel-collapse collapse <?=in_array($ka_route,$ka_demos) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                        <ul class="list-group">
+                            <a href="/home/demo/showtable">
+                                <li class="list-group-item">
+    <!--                                <button class="menu-item-left">-->
+                                        <span class="glyphicon glyphicon-triangle-right"></span> 表格
+    <!--                                </button>-->
+                                </li>
+                            </a>
+                            <a href="/home/demo/showform">
+                                <li class="list-group-item">
+    <!--                                <button class="menu-item-left">-->
+                                        <span class="glyphicon glyphicon-triangle-right"></span> 表单
+    <!--                                </button>-->
+                                </li>
+                            </a>
+                            <a href="/home/demo/showmore">
+                                <li class="list-group-item">
+    <!--                                <button class="menu-item-left">-->
+                                        <span class="glyphicon glyphicon-triangle-right"></span> 更多
+    <!--                                </button>-->
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div class="col-md-10 content_right" style="border: 0px solid red;">
@@ -223,6 +285,9 @@
             /*切换折叠指示图标*/
             $(this).find("span").toggleClass("glyphicon-chevron-down");
             $(this).find("span").toggleClass("glyphicon-chevron-up");
+            if($(this).data('url') != undefined){
+                window.location.href = $(this).data('url');
+            }
         });
         $(".navbar-brand").click(function (e) {
             $(".menu_left").toggleClass('hidden');
@@ -239,9 +304,11 @@
     </nav>
 </footer>
 <script>
+    data()
+</script>
+<script>
     $(function () {
         $(window).scroll(function(){
-            var v = 0;
             var scrollTop = $(this).scrollTop();    // 滚动条距离顶部距离
             var scrollHeight = $(document).height();    // 滚动条高度
             var windowHeight = $(this).height();    // 窗口高度
