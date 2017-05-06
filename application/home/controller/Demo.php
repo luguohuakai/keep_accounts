@@ -25,4 +25,10 @@ class Demo
     public function showMore(){
         return view();
     }
+
+    // 邮件发送
+    public function send_email(){
+        $rs = send_email('1102313831@qq.com','maoge','<h1>Hello</h1><h2 style="color: red;">你好</h2>');
+        dump($rs);
+    }
 }

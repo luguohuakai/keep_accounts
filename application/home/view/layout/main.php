@@ -129,7 +129,7 @@
         <div class="col-md-2 menu_left">
             <div class="panel-group table-responsive" role="tablist">
 
-                <div class="panel panel-primary <?=in_array($ka_route,$ka_bash) ? 'panel-success' : ''?> leftMenu">
+                <div class="panel <?=in_array($ka_route,$ka_bash) ? 'panel-success' : 'panel-primary'?> leftMenu">
                     <!-- 利用data-target指定要折叠的分组列表 -->
                     <div class="panel-heading down_up" id="collapseListGroupHeading1" data-toggle="collapse" data-url="/home/index/index.html" role="tab" >
                         <h4 class="panel-title">
