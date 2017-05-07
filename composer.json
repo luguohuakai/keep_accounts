@@ -20,7 +20,9 @@
         "php": ">=5.4.0",
         "topthink/framework": "^5.0",
         "topthink/think-migration": "^1.1",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^5.2",
+        "phpoffice/phpexcel": "^1.8",
+        "mpdf/mpdf": "^6.1"
     },
     "extra": {
         "think-path": "thinkphp"
