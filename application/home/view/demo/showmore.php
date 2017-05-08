@@ -146,18 +146,17 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="..." alt="...">
+            <img src="http://attach.bbs.miui.com/forum/201704/15/065614ynk3in9yqtik8qss.jpg" alt="..." width="100%" style="height: 500px">
             <div class="carousel-caption">
-                ...
+                鱼
             </div>
         </div>
         <div class="item">
-            <img src="..." alt="...">
+            <img src="https://zos.alipayobjects.com/cmsmng/cms/images/ix0ehxi5/0dba1071-476f-480c-ba91-8462b3b3a0e2.jpeg" width="100%" style="height: 500px" alt="...">
             <div class="carousel-caption">
-                ...
+                支付宝
             </div>
         </div>
-        ...
     </div>
 
     <!-- Controls -->

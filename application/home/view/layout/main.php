@@ -297,15 +297,12 @@
 </script>
 <!--页脚-->
 <footer>
-    <nav class="navbar navbar-default navbar-fixed-bottom hide">
+    <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container" style="text-align: center;">
             <p style="padding-top: 18px;">©{:date('Y')} {:lang('keep_accounts')}</p>
         </div>
     </nav>
 </footer>
-<script>
-    data()
-</script>
 <script>
     $(function () {
         $(window).scroll(function(){
@@ -313,11 +310,11 @@
             var scrollHeight = $(document).height();    // 滚动条高度
             var windowHeight = $(this).height();    // 窗口高度
             // 滚动到底部触发事件
-            if(scrollTop + windowHeight == scrollHeight){
-                $(".navbar-fixed-bottom").addClass('show');
-            }else {
-                $(".navbar-fixed-bottom").removeClass('show');
-            }
+//            if(scrollTop + windowHeight == scrollHeight){
+//                $(".navbar-fixed-bottom").addClass('show');
+//            }else {
+//                $(".navbar-fixed-bottom").removeClass('show');
+//            }
             // 向下滚动40px后显示导航条
             if(scrollTop >= 50){
                 $(".navbar-static-top").css('position','fixed');
