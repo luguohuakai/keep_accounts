@@ -8,6 +8,11 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+include_once '../route/route.php';
+
+//use think\Route;
+
+//Route::get('ac','account/index/index');
 
 return [
     '__pattern__' => [
@@ -17,5 +22,5 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-
+//    'ac' => 'account/index/index',
 ];

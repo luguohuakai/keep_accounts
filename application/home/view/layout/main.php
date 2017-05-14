@@ -12,7 +12,8 @@
 
     // 记一笔
     $ka_record = [
-        'home/account/record',
+        'account/index/add',
+        'account/index/lst',
     ];
 
     // 统计分析
@@ -150,15 +151,10 @@
                     <div id="collapseListGroup1" class="panel-collapse collapse <?=in_array($ka_route,$ka_record) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading1">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <!-- 利用data-target指定URL -->
-                                <!--<button class="menu-item-left" data-target="test2.html">-->
-                                    <a href="/home/account/record"><span class="glyphicon glyphicon-triangle-right"></span>新的消费</a>
-                                <!--</button>-->
+                                    <a href="/ac/add"><span class="glyphicon glyphicon-triangle-right"></span>新的消费</a>
                             </li>
                             <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项1-2
-                                </button>
+                                    <a href="/ac/lst"><span class="glyphicon glyphicon-triangle-right"></span>消费列表</a>
                             </li>
                         </ul>
                     </div>
