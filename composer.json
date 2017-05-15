@@ -22,7 +22,8 @@
         "topthink/think-migration": "^1.1",
         "phpmailer/phpmailer": "^5.2",
         "phpoffice/phpexcel": "^1.8",
-        "mpdf/mpdf": "^6.1"
+        "mpdf/mpdf": "^6.1",
+        "hisune/echarts-php": "^1.0"
     },
     "extra": {
         "think-path": "thinkphp"
