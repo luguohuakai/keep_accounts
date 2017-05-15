@@ -51,6 +51,15 @@ class Index extends Controller implements BillStatistics
      * 按时间段查询总消费
      */
     public function totalConsumptionByTime(){}
+
+    /**
+     * 自动结算上月11日到本月10日的总消费 每人消费总额
+     */
+    public function autoClear(){}
+
+    /**
+     * 查询月表记录 如果没有则创建 有则查询
+     */
 }
 
 

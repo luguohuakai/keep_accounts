@@ -2,7 +2,7 @@
     <div class="col-lg-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 系统状态</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 本月消费走势</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -28,7 +28,7 @@
     <div class="col-lg-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 系统状态</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 近三月消费走势</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -55,13 +55,18 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 动态</h3>
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 恩格尔系数</h3>
     </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-3">
                 <div class="jumbotron">
-                    <h1>Hello, world!</h1>
+                    <span>
+                        恩格尔系数:食物支出金额÷总支出金额x100%=恩格尔系数<br>
+                        食物支出变动百分比÷总支出变动百分比x100%=食物支出对总支出的比率(R1)<br>
+                        食物支出变动百分比÷收入变动百分比x100%=食物支出对收入的比率(R2 又称为食物支出的收入弹性)<br>
+                        平均家庭恩格尔系数大于60%为贫穷；50%-60%为温饱；40%-50%为小康；30%-40%属于相对富裕；20%-30%为富足；20%以下为极其富裕<br>
+                    </span>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -86,7 +91,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="/assets/css/time_line.css">
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 管理员日志</h3>
+        <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 近期消费日志</h3>
     </div>
     <div class="panel-body">
         <ul class="timeline">

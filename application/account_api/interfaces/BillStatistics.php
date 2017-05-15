@@ -32,4 +32,9 @@ interface BillStatistics{
      * 按时间段查询总消费
      */
     function totalConsumptionByTime();
+
+    /**
+     * 自动结算上月11日到本月10日的总消费 每人消费总额
+     */
+    function autoClear();
 }
