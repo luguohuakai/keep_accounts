@@ -1,22 +1,45 @@
 <div class="row">
-    <div class="col-lg-6">
+
+    <div class="col-lg-3">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 4 月已结算</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge">214.00</span>
+                                总消费
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                小明
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                小龙
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge">14</span>
+                                差额
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 本月消费走势</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="jumbotron">
-                            <h4>Hello, world!</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="jumbotron">
-                            <h4>Hello, world!</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-12">
                         <div class="jumbotron">
                             <h4>Hello, world!</h4>
                         </div>

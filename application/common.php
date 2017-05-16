@@ -204,3 +204,75 @@ if (!function_exists('excel_to_database')) {
         }
     }
 }
+
+// 引入第三方 js
+if (!function_exists('js')){
+    /**
+     * @param string|array $sources
+     * @param string $where
+     */
+    function js($sources,$where = ''){
+        if($where == 'vendor' || $where == '') {
+            $where = VENDOR_PATH;
+
+            if(!is_array($sources)){
+                $str = file_get_contents($where . $sources);
+                echo '<script type="text/javascript">' , $str , '</script>';
+                unset($str);
+            }else{
+                foreach ($sources as $source) {
+                    $str = file_get_contents($where. $source);
+                    echo '<script type="text/javascript">' , $str , '</script>';
+                    unset($str);
+                }
+            }
+        }
+        if($where == 'public') {
+            $where = DS;
+
+            if(!is_array($sources)){
+                echo '<script type="text/javascript" src="' , $where , $sources , '"></script>';
+            }else{
+                foreach ($sources as $source) {
+                    echo '<script type="text/javascript" src="' , $where , $source , '"></script>';
+                }
+            }
+        }
+    }
+}
+
+// 引入第三方 css
+if (!function_exists('css')){
+    /**
+     * @param string|array $sources
+     * @param string $where
+     */
+    function css($sources,$where = ''){
+        if($where == 'vendor' || $where == '') {
+            $where = VENDOR_PATH;
+
+            if(!is_array($sources)){
+                $str = file_get_contents($where . $sources);
+                echo '<style>' , $str , '</style>';
+                unset($str);
+            }else{
+                foreach ($sources as $source) {
+                    $str = file_get_contents($where . $source);
+                    echo '<style>' , $str , '</style>';
+                    unset($str);
+                }
+            }
+        }
+        if($where == 'public') {
+            $where = DS;
+
+            if(!is_array($sources)){
+                echo '<link rel="stylesheet" href="' , $where , $sources , '" />';
+            }else{
+                foreach ($sources as $source) {
+                    echo '<link rel="stylesheet" href="' , $where , $source , '" />';
+                }
+            }
+        }
+    }
+}

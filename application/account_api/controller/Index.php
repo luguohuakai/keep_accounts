@@ -2,6 +2,7 @@
 namespace app\account_api\controller;
 
 use app\account_api\interfaces\BillStatistics;
+use app\account_api\model\MonthMore;
 use think\Controller;
 
 class Index extends Controller implements BillStatistics
@@ -55,11 +56,45 @@ class Index extends Controller implements BillStatistics
     /**
      * 自动结算上月11日到本月10日的总消费 每人消费总额
      */
-    public function autoClear(){}
+    public function autoClear(){
+        $gid = input('post.gid');
+
+        // 本月
+        $year_month = date('Y-m');
+        // 本月 10 日时间戳
+        $year_month_10 = strtotime($year_month) + 10 * 24 * 60 * 60;
+        // 上月 11 日时间戳
+        $year_month_11 = strtotime("last month") + 11 * 24 * 60 * 60;
+
+        $month_more = new MonthMore();
+
+        $rs = $month_more->getMonthMore($gid,$year_month);
+        if(!$rs){
+            // 开始自动结算
+            $rs_auto = $month_more->autoClear($gid,$year_month_10,$year_month_11);
+            if($rs_auto){
+                $rs = $month_more->getMonthMore($gid,$year_month);
+            }else{
+                $re['msg'] = '自动结算失败';
+                $re['status'] = 0;
+                return json($re);
+            }
+        }
+
+        // 获取 月数据
+    }
 
     /**
      * 查询月表记录 如果没有则创建 有则查询
      */
+
+    /**
+     * 最近消费记录
+     */
+    public function recentRecord(){
+
+    }
+
 }
 
 

@@ -11,7 +11,7 @@ namespace app\account_api\model;
 
 use think\Model;
 
-class Bill extends Model
+class UsersGroup extends Model
 {
 
 }
