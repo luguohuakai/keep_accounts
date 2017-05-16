@@ -312,11 +312,11 @@
 //                $(".navbar-fixed-bottom").removeClass('show');
 //            }
             // 向下滚动40px后显示导航条
-            if(scrollTop >= 50){
-                $(".navbar-static-top").css('position','fixed');
-            }else {
-                $(".navbar-static-top").css('position','relative');
-            }
+//            if(scrollTop >= 50){
+//                $(".navbar-static-top").css('position','fixed');
+//            }else {
+//                $(".navbar-static-top").css('position','relative');
+//            }
             // 判断页面向上还是向下滚动
 
         });
