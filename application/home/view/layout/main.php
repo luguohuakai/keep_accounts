@@ -293,7 +293,7 @@
 </script>
 <!--页脚-->
 <footer>
-    <nav class="navbar navbar-default navbar-fixed-bottom">
+    <nav class="navbar navbar-default navbar-fixed-bottom hide">
         <div class="container" style="text-align: center;">
             <p style="padding-top: 18px;">©{:date('Y')} {:lang('keep_accounts')}</p>
         </div>
