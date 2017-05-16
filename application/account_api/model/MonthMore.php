@@ -28,7 +28,7 @@ class MonthMore extends Model
     }
 
     // 自动结算
-    public function autoClear($gid,$year_month_10,$year_month_11){
+    public function autoClear($gid,$year_month_11,$year_month_10){
         $bill = new Bill();
         $users_group = new UsersGroup();
         $month = new Month();

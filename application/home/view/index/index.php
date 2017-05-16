@@ -1,3 +1,9 @@
+<?php
+js('static\echart\echarts.min.js','public');
+?>
+<style>
+    span>blockquote>p{font-size:12px;}
+</style>
 <div class="row">
 
     <div class="col-lg-3">
@@ -32,7 +38,7 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 本月消费走势</h3>
@@ -40,35 +46,23 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="jumbotron">
-                            <h4>Hello, world!</h4>
-                        </div>
+                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                        <div id="recent_month_1" style="width: 100%;height:200px;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 近三月消费走势</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="jumbotron">
-                            <h3>Hello, world!</h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="jumbotron">
-                            <h3>Hello, world!</h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="jumbotron">
-                            <h3>Hello, world!</h3>
-                        </div>
+                    <div class="col-lg-12">
+                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                        <div id="recent_month_3" style="width: 100%;height:200px;"></div>
                     </div>
                 </div>
             </div>
@@ -83,29 +77,26 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-lg-3">
-                <div class="jumbotron">
+<!--                <div class="jumbotron">-->
                     <span>
-                        恩格尔系数:食物支出金额÷总支出金额x100%=恩格尔系数<br>
-                        食物支出变动百分比÷总支出变动百分比x100%=食物支出对总支出的比率(R1)<br>
-                        食物支出变动百分比÷收入变动百分比x100%=食物支出对收入的比率(R2 又称为食物支出的收入弹性)<br>
-                        平均家庭恩格尔系数大于60%为贫穷；50%-60%为温饱；40%-50%为小康；30%-40%属于相对富裕；20%-30%为富足；20%以下为极其富裕<br>
+                        <blockquote>
+                            <p>恩格尔系数:食物支出金额÷总支出金额x100%=恩格尔系数</p>
+                        </blockquote>
+                        <blockquote>
+                            <p>食物支出变动百分比÷总支出变动百分比x100%=食物支出对总支出的比率(R1)</p>
+                        </blockquote>
+                        <blockquote>
+                            <p>食物支出变动百分比÷收入变动百分比x100%=食物支出对收入的比率(R2 又称为食物支出的收入弹性)</p>
+                        </blockquote>
+                        <blockquote>
+                            <p>平均家庭恩格尔系数大于60%为贫穷；50%-60%为温饱；40%-50%为小康；30%-40%属于相对富裕；20%-30%为富足；20%以下为极其富裕</p>
+                        </blockquote>
                     </span>
-                </div>
+<!--                </div>-->
             </div>
-            <div class="col-lg-3">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                </div>
+            <div class="col-lg-9">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="engels_coefficient" style="width: 100%;height:400px;"></div>
             </div>
         </div>
     </div>
@@ -228,3 +219,87 @@
         </ul>
     </div>
 </div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('recent_month_1'));
+
+    // 指定图表的配置项和数据
+    var option = {
+    title: {
+    text: '示例'
+    },
+    tooltip: {},
+    legend: {
+    data:['销量']
+    },
+    xAxis: {
+    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+    name: '销量',
+    type: 'bar',
+    data: [5, 20, 36, 10, 10, 20]
+    }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('recent_month_3'));
+
+    // 指定图表的配置项和数据
+    var option = {
+    title: {
+    text: '示例'
+    },
+    tooltip: {},
+    legend: {
+    data:['销量']
+    },
+    xAxis: {
+    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+    name: '销量',
+    type: 'bar',
+    data: [5, 20, 36, 10, 10, 20]
+    }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('engels_coefficient'));
+
+    // 指定图表的配置项和数据
+    var option = {
+    title: {
+    text: '示例'
+    },
+    tooltip: {},
+    legend: {
+    data:['销量']
+    },
+    xAxis: {
+    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+    name: '销量',
+    type: 'bar',
+    data: [5, 20, 36, 10, 10, 20]
+    }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>

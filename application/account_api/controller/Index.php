@@ -2,6 +2,7 @@
 namespace app\account_api\controller;
 
 use app\account_api\interfaces\BillStatistics;
+use app\account_api\model\Month;
 use app\account_api\model\MonthMore;
 use think\Controller;
 
@@ -67,21 +68,37 @@ class Index extends Controller implements BillStatistics
         $year_month_11 = strtotime("last month") + 11 * 24 * 60 * 60;
 
         $month_more = new MonthMore();
+        $month = new Month();
 
         $rs = $month_more->getMonthMore($gid,$year_month);
         if(!$rs){
             // 开始自动结算
-            $rs_auto = $month_more->autoClear($gid,$year_month_10,$year_month_11);
+            $rs_auto = $month_more->autoClear($gid,$year_month_11,$year_month_10);
             if($rs_auto){
                 $rs = $month_more->getMonthMore($gid,$year_month);
             }else{
                 $re['msg'] = '自动结算失败';
                 $re['status'] = 0;
+
                 return json($re);
             }
         }
 
-        // 获取 月数据
+        // 获取 每人月数据
+        $rss = $month->getMonth($gid,$year_month_11,$year_month_10);
+        if($rs and $rss){
+            $re['msg'] = '获取成功';
+            $re['status'] = 1;
+            $re['data']['month_more'] = $rs;
+            $re['data']['month'] = $rss;
+
+            return json($re);
+        }else{
+            $re['msg'] = '自动结算失败';
+            $re['status'] = 0;
+
+            return json($re);
+        }
     }
 
     /**
