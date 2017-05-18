@@ -20,6 +20,8 @@ class Month extends Model
             ->where('gid',$gid)
             ->whereBetween('create_time',[$year_month_11,$year_month_10])
             ->select();
+        echo $this->getLastSql();
+        dump($rs);die;
         if($rs){
             return $rs;
         }else{

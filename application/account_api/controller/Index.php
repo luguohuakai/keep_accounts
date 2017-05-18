@@ -56,28 +56,46 @@ class Index extends Controller implements BillStatistics
 
     /**
      * 自动结算上月11日到本月10日的总消费 每人消费总额
+     *
+     * 如果当前时间在本月10日之前则显示上上个月11日到上个月10日之间的数据
+     * 在本月10日之后则显示上个月11日到本月10日之间的数据
      */
     public function autoClear(){
         $gid = input('post.gid');
 
+        // 今天
+        $today = date('d');
         // 本月
         $year_month = date('Y-m');
-        // 本月 10 日时间戳
-        $year_month_10 = strtotime($year_month) + 10 * 24 * 60 * 60;
-        // 上月 11 日时间戳
-        $year_month_11 = strtotime("last month") + 11 * 24 * 60 * 60;
+        // 上月
+        $year_month_last = date('Y-m',strtotime('last month'));
 
         $month_more = new MonthMore();
         $month = new Month();
 
-        $rs = $month_more->getMonthMore($gid,$year_month);
+        if($today > 10){
+            // 本月 10 日时间戳
+            $year_month_10 = strtotime($year_month) + 10 * 24 * 60 * 60 - 1;
+            // 上月 11 日时间戳
+            $year_month_11 = strtotime(date('Y-m-11',strtotime("last month")));
+
+            $rs = $month_more->getMonthMore($gid,$year_month);
+        }else{
+            // 上月 10 日时间戳
+            $year_month_10 = strtotime(date('Y-m-10',strtotime("last month")));
+            // 上上月 11 日时间戳
+            $year_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
+
+            $rs = $month_more->getMonthMore($gid,$year_month_last);
+        }
+
         if(!$rs){
             // 开始自动结算
             $rs_auto = $month_more->autoClear($gid,$year_month_11,$year_month_10);
             if($rs_auto){
                 $rs = $month_more->getMonthMore($gid,$year_month);
             }else{
-                $re['msg'] = '自动结算失败';
+                $re['msg'] = '自动结算失败1';
                 $re['status'] = 0;
 
                 return json($re);
@@ -86,6 +104,7 @@ class Index extends Controller implements BillStatistics
 
         // 获取 每人月数据
         $rss = $month->getMonth($gid,$year_month_11,$year_month_10);
+        dump($rss);die;
         if($rs and $rss){
             $re['msg'] = '获取成功';
             $re['status'] = 1;
@@ -94,7 +113,7 @@ class Index extends Controller implements BillStatistics
 
             return json($re);
         }else{
-            $re['msg'] = '自动结算失败';
+            $re['msg'] = '自动结算失败2';
             $re['status'] = 0;
 
             return json($re);

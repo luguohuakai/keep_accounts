@@ -20,6 +20,8 @@ class MonthMore extends Model
             ->where('year_month',$year_month)
             ->field('id,year_month,create_time,total_amount,avg_amount,gid')
             ->select();
+//        echo $this->getLastSql();
+//        dump($rs);die;
         if ($rs){
             return $rs;
         }else{
@@ -37,6 +39,8 @@ class MonthMore extends Model
             ->where('gid',$gid)
             ->whereBetween('create_time',[$year_month_11,$year_month_10])
             ->sum('amount');
+//        dump($rs);
+//        dump($bill->getLastSql());die;
 
         // 查询当前组有多少人
         $count = $users_group->where('gid',$gid)->count();
@@ -50,8 +54,9 @@ class MonthMore extends Model
             $bill->startTrans();
             $data['year_month'] = date('Y-m');
             $data['create_time'] = time();
-            $data['total_amount'] = $rs['tp_sum'];
-            $data['avg_amount'] = $rs['tp_sum'] / $count;
+            $data['total_amount'] = $rs;
+            $data['avg_amount'] = $rs / $count;
+            $data['gid'] = $gid;
             $rs_insert = $this->insert($data);
 
             $rsss = $bill
@@ -63,17 +68,20 @@ class MonthMore extends Model
 
             if($rsss){
                 foreach ($rsss as $k => $v) {
-                    $data2[$k]['total_amount'] = $rsss['amount'];
-                    $data2[$k]['uid'] = $rsss['giver'];
+                    $data2[$k]['total_amount'] = $v['amount'];
+                    $data2[$k]['uid'] = $v['giver'];
                     $data2[$k]['gid'] = $gid;
                     $data2[$k]['create_time'] = time();
                 }
+//                dump($data2);die;
                 if(isset($data2)){
                     $rs_save_all = $month->saveAll($data2);
                     if($rs_insert and $rs_save_all){
                         $bill->commit();
+                        return true;
                     }else{
                         $bill->rollback();
+                        return false;
                     }
                 }else{
                     $bill->rollback();

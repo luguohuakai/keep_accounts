@@ -16,7 +16,7 @@ js('static\echart\echarts.min.js','public');
                     <div class="col-lg-12">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <span class="badge">214.00</span>
+                                <span class="badge" id="total_amount">214.00</span>
                                 总消费
                             </li>
                             <li class="list-group-item">
@@ -37,6 +37,19 @@ js('static\echart\echarts.min.js','public');
             </div>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $.post(
+                '/account_api/index/autoClear',
+                {gid:1},
+                function (e) {
+//                    alert(e.name);
+//                    console.log(e);
+                },'json'
+            )
+        })
+    </script>
 
     <div class="col-lg-4">
         <div class="panel panel-primary">
