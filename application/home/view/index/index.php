@@ -9,27 +9,19 @@ js('static\echart\echarts.min.js','public');
     <div class="col-lg-3">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 4 月已结算</h3>
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> <span id="settlement_month">--</span> 已结算</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <span class="badge" id="total_amount">214.00</span>
+                                <span class="badge" id="total_amount">--</span>
                                 总消费
                             </li>
                             <li class="list-group-item">
-                                <span class="badge">14</span>
-                                小明
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                小龙
-                            </li>
-                            <li class="list-group-item">
-                                <span class="badge">14</span>
-                                差额
+                                <span class="badge" id="difference">--</span>
+                                平均
                             </li>
                         </ul>
                     </div>
@@ -44,8 +36,16 @@ js('static\echart\echarts.min.js','public');
                 '/account_api/index/autoClear',
                 {gid:1},
                 function (e) {
-//                    alert(e.name);
-//                    console.log(e);
+                    $('#settlement_month').html(e.data.month_more.year_month);
+                    $('#total_amount').html(e.data.month_more.total_amount);
+                    var month = e.data.month;
+                    var str = '';
+                    for(var k in month){
+                        str += '<li class="list-group-item"><span class="badge">' + month[k].total_amount + '</span>'  + month[k].user_name + '</li>';
+                    }
+                    $('#total_amount').parent().after(str);
+                    $('#difference').html(e.data.month_more.avg_amount)
+
                 },'json'
             )
         })

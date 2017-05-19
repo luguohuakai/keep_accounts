@@ -14,15 +14,17 @@ use think\Model;
 class Month extends Model
 {
     // 根据gid获取月数据
-    public function getMonth($gid,$year_month_11,$year_month_10){
+    public function getMonth($gid,$year_month){
         $rs = $this
-            ->field('id,create_time,uid,total_amount,gid')
+            ->field('id,create_time,uid,total_amount,gid,year_month')
             ->where('gid',$gid)
-            ->whereBetween('create_time',[$year_month_11,$year_month_10])
+            ->where('year_month',$year_month)
             ->select();
-        echo $this->getLastSql();
-        dump($rs);die;
         if($rs){
+            $users = new Users();
+            foreach ($rs as &$r) {
+                $r['user_name'] =  $users->getFieldById($r['uid'],'user_name');
+            }
             return $rs;
         }else{
             return false;

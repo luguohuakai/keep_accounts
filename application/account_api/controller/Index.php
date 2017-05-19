@@ -69,6 +69,8 @@ class Index extends Controller implements BillStatistics
         $year_month = date('Y-m');
         // 上月
         $year_month_last = date('Y-m',strtotime('last month'));
+        // 上上月
+        $year_month_last2 = date('Y-m',strtotime("-2 month"));
 
         $month_more = new MonthMore();
         $month = new Month();
@@ -78,22 +80,26 @@ class Index extends Controller implements BillStatistics
             $year_month_10 = strtotime($year_month) + 10 * 24 * 60 * 60 - 1;
             // 上月 11 日时间戳
             $year_month_11 = strtotime(date('Y-m-11',strtotime("last month")));
+            // 结算月
+            $settlement_month = $year_month_last;
 
-            $rs = $month_more->getMonthMore($gid,$year_month);
+            $rs = $month_more->getMonthMore($gid,$settlement_month);
         }else{
             // 上月 10 日时间戳
             $year_month_10 = strtotime(date('Y-m-10',strtotime("last month")));
             // 上上月 11 日时间戳
             $year_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
+            // 结算月
+            $settlement_month = $year_month_last2;
 
-            $rs = $month_more->getMonthMore($gid,$year_month_last);
+            $rs = $month_more->getMonthMore($gid,$settlement_month);
         }
 
         if(!$rs){
             // 开始自动结算
-            $rs_auto = $month_more->autoClear($gid,$year_month_11,$year_month_10);
+            $rs_auto = $month_more->autoClear($gid,$year_month_11,$year_month_10,$settlement_month);
             if($rs_auto){
-                $rs = $month_more->getMonthMore($gid,$year_month);
+                $rs = $month_more->getMonthMore($gid,$settlement_month);
             }else{
                 $re['msg'] = '自动结算失败1';
                 $re['status'] = 0;
@@ -103,8 +109,7 @@ class Index extends Controller implements BillStatistics
         }
 
         // 获取 每人月数据
-        $rss = $month->getMonth($gid,$year_month_11,$year_month_10);
-        dump($rss);die;
+        $rss = $month->getMonth($gid,$settlement_month);
         if($rs and $rss){
             $re['msg'] = '获取成功';
             $re['status'] = 1;
