@@ -23,7 +23,7 @@ js([
         <form class="form-horizontal form-inline" method="post" action="/ac/add_handle">
             <div class="row">
                 <div class="col-sm-2">
-                    <input type="text" class="form-control input-sm" id="create_time" name="create_time" placeholder="购买时间">
+                    <input type="text" class="form-control input-sm" id="buy_time" name="buy_time" placeholder="购买时间">
                 </div>
                 <div class="col-sm-2">
                     <input type="text" class="form-control input-sm" id="goods" name="goods" placeholder="购买物品">
@@ -32,8 +32,14 @@ js([
                     <input type="text" class="form-control input-sm" id="amount" name="amount" placeholder="金额">
                 </div>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control input-sm" id="giver" name="giver" placeholder="谁掏的钱">
+<!--                    <input type="text" class="form-control input-sm" id="giver" name="giver" placeholder="谁掏的钱">-->
+                    <select class="form-control input-sm" name="giver" id="giver" style="width: 100%;">
+                        {volist name="rs" id="vo"}
+                            <option value="{$vo.uid}">{$vo.user_name}</option>
+                        {/volist}
+                    </select>
                 </div>
+                <input type="hidden" name="gid" value="{$group_id}">
 <!--                <div class="col-sm-2">-->
 <!--                    <input type="text" class="form-control input-sm" id="exampleInputName2" name="" placeholder="Jane Doe">-->
 <!--                </div>-->
@@ -85,14 +91,14 @@ js([
 <!--            </div>-->
 
 <!--            <div class="form-group has-success has-feedback">-->
-<!--                <label class="control-label col-sm-1" for="create_time"></label>-->
+<!--                <label class="control-label col-sm-1" for="buy_time"></label>-->
 <!--                <div class="col-sm-9">-->
 <!--                    <div class="input-group">-->
 <!--                        <span class="input-group-addon">购买时间</span>-->
-<!--                        <input type="text" class="form-control" id="create_time" name="create_time" aria-describedby="create_timeStatus">-->
+<!--                        <input type="text" class="form-control" id="buy_time" name="buy_time" aria-describedby="buy_timeStatus">-->
 <!--                    </div>-->
 <!--                    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>-->
-<!--                    <span id="create_timeStatus" class="sr-only">(success)</span>-->
+<!--                    <span id="buy_timeStatus" class="sr-only">(success)</span>-->
 <!--                </div>-->
 <!--            </div>-->
 <!---->
@@ -263,7 +269,7 @@ js([
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#create_time').datetimepicker({
+        $('#buy_time').datetimepicker({
             format: 'YYYY-MM-DD HH:mm:ss',
             showClose: true,
             showClear: true,

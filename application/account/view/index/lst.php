@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
+                    <th>购买时间</th>
                     <th>创建时间</th>
                     <th>修改时间</th>
                     <th>商品</th>
@@ -28,11 +29,12 @@
                 {volist name='lst' id='bill'}
                 <tr>
                     <td>{$bill.id}</td>
+                    <td>{$bill.buy_time > 10000000 ? date('Y-m-d',$bill.buy_time) : $bill.buy_time}</td>
                     <td>{$bill.create_time > 10000000 ? date('Y-m-d',$bill.create_time) : $bill.create_time}</td>
                     <td>{$bill.update_time > 10000000 ? date('Y-m-d',$bill.update_time) : $bill.update_time}</td>
                     <td>{$bill.goods}</td>
                     <td>{$bill.amount}</td>
-                    <td>{$bill.giver}</td>
+                    <td>{$bill.user_name}</td>
                 </tr>
                 {/volist}
                 </tbody>

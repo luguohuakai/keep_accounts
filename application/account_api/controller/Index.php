@@ -1,13 +1,34 @@
 <?php
 namespace app\account_api\controller;
 
+use app\account\model\Bill;
+use app\account\model\UsersGroup;
 use app\account_api\interfaces\BillStatistics;
-use app\account_api\model\Month;
-use app\account_api\model\MonthMore;
+use app\account\model\Month;
+use app\account\model\MonthMore;
+use app\common\Tools;
 use think\Controller;
 
 class Index extends Controller implements BillStatistics
 {
+    // 上月11日 凌晨
+    public $last_month_11;
+    // 上上月11日 凌晨
+    public $last_last_month_11;
+    // 本月10日 深夜
+    public $this_month_10;
+    // 上月10日 深夜
+    public $last_month_10;
+
+    public function _initialize()
+    {
+        parent::_initialize();
+        $this->last_month_11 = strtotime(date('Y-m-11',strtotime("last month")));
+        $this->last_last_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
+        $this->this_month_10 = strtotime(date('Y-m')) + 10 * 24 * 60 * 60 - 1;
+        $this->last_month_10 = strtotime(date('Y-m-11',strtotime("last month"))) - 1;
+    }
+
     public function index()
     {
         return '
@@ -86,7 +107,7 @@ class Index extends Controller implements BillStatistics
             $rs = $month_more->getMonthMore($gid,$settlement_month);
         }else{
             // 上月 10 日时间戳
-            $year_month_10 = strtotime(date('Y-m-10',strtotime("last month")));
+            $year_month_10 = strtotime(date('Y-m-11',strtotime("last month"))) - 1;
             // 上上月 11 日时间戳
             $year_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
             // 结算月
@@ -136,6 +157,62 @@ class Index extends Controller implements BillStatistics
 
     }
 
+    /**
+     * 按组查询每个成员的本月消费情况和总消费情况
+     */
+    public function getThisMonth(){
+        $gid = 1;
+
+        $users_group = new UsersGroup();
+        $bill = new Bill();
+
+        // 上月11日
+        $start_time = $this->last_month_11;
+        // 现在
+        $end_time = time();
+
+        $rs_group = $users_group->getMembersByGroupId($gid);
+        if($rs_group){
+
+            foreach ($rs_group as $item) {
+                $legend_data[] = $item['user_name'];
+                $re['series'][] = [
+                    'name' => $item['user_name'],
+                    'type' => 'line',
+                    'smooth' => true,
+                    'areaStyle' => ['normal' => []],
+                    'data' => $bill->getSeriesDataByUid($item['uid'],$gid,$start_time,$end_time)
+                ];
+            }
+            $legend_data[] = '总金额';
+            $re['series'][] = [
+                'name' => '总金额',
+                'type' => 'bar',
+                'label' => [
+                    'normal' => ['show' => true,'position' => 'top'],
+                    'formatter' => "
+                        function(params){
+                            return params == 0 ? '' : params;
+                        }
+                    ",
+                ],
+                'data' => $bill->getSeriesDataByGid($gid,$start_time,$end_time)
+            ];
+//            $re['series'] = json_encode($re['series']);
+
+            $re['msg'] = '获取成功';
+            $re['status'] = 1;
+            $re['legend_data'] = $legend_data;
+            $re['xaxis_data'] = Tools::format_time_to_data($start_time,$end_time);
+
+            return json($re);
+        }else{
+            $re['msg'] = '组错误';
+            $re['status'] = 0;
+
+            return json($re);
+        }
+    }
 }
 
 
