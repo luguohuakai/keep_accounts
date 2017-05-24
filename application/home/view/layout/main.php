@@ -27,6 +27,11 @@
         'home/demo/showform',
         'home/demo/showmore',
     ];
+
+    // AngularJs选项卡
+    $ka_angular = [
+        'home/angular/index',
+    ];
 //dump($ka_demos);
 //dump($ka_route);
 ?>
@@ -257,6 +262,24 @@
     <!--                                <button class="menu-item-left">-->
                                         <span class="glyphicon glyphicon-triangle-right"></span> 更多
     <!--                                </button>-->
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading down_up" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#angular" role="tab" >
+                        <h4 class="panel-title">
+                            AngularJs
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_angular) ? 'up' : 'down'?> right"></span>
+                        </h4>
+                    </div>
+                    <div id="angular" class="panel-collapse collapse <?=in_array($ka_route,$ka_angular) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                        <ul class="list-group">
+                            <a href="/home/angular/index">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> demo1
                                 </li>
                             </a>
                         </ul>
