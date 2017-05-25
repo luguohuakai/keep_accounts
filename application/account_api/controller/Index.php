@@ -153,21 +153,26 @@ class Index extends Controller implements BillStatistics
     /**
      * 最近消费记录
      */
-    public function recentRecord(){
-
-    }
+    public function recentRecord(){}
 
     /**
      * 按组查询每个成员的本月消费情况和总消费情况
      */
-    public function getThisMonth(){
-        $gid = 1;
+    public function getDataByTime(){
+        $gid = input('post.gid',1);
+        $type = input('post.type',1);
+
+        if($type == 2){
+            // 最近3个月消费走势
+            $start_time = strtotime(date('Y-m-01',strtotime("-2 month")));
+        }else{
+            // 上月11日 按组查询每个成员的本月消费情况和总消费情况
+            $start_time = $this->last_month_11;
+        }
 
         $users_group = new UsersGroup();
         $bill = new Bill();
 
-        // 上月11日
-        $start_time = $this->last_month_11;
         // 现在
         $end_time = time();
 
@@ -189,12 +194,10 @@ class Index extends Controller implements BillStatistics
                 'name' => '总金额',
                 'type' => 'bar',
                 'label' => [
-                    'normal' => ['show' => true,'position' => 'top'],
-                    'formatter' => "
-                        function(params){
-                            return params == 0 ? '' : params;
-                        }
-                    ",
+                    'normal' => [
+                        'show' => true,
+                        'position' => 'top',
+                    ],
                 ],
                 'data' => $bill->getSeriesDataByGid($gid,$start_time,$end_time)
             ];
@@ -212,6 +215,13 @@ class Index extends Controller implements BillStatistics
 
             return json($re);
         }
+    }
+
+    /**
+     * 最近3个月消费走势
+     */
+    public function getRecentThreeMonth(){
+
     }
 }
 

@@ -18,6 +18,7 @@ class Test extends Controller
 
         $re['id'] = $id;
         $re['name'] = 'maoge';
+        $re['fun'] = "function(){}";
 
         return json($re);
     }

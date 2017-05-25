@@ -268,7 +268,7 @@ js('static\echart\echarts.min.js', 'public');
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '本月消费'
+//            text: '本月消费'
         },
 
         dataZoom: [
@@ -300,26 +300,18 @@ js('static\echart\echarts.min.js', 'public');
             boundaryGap: false,
             data: []
         },
-        yAxis: {},
-        series: []
+        yAxis: {}
     };
 
     myChart.setOption(option);
 
-    var url = '/account_api/index/getthismonth';
-    var data = {};
+    var url = '/account_api/index/getdatabytime';
+    var data = {gid:1,type:1};
     var type = 'json';
     myChart.showLoading();
     var fun = function (e) {
         myChart.hideLoading();
-        if (e.status == 1) {
-//            for(var k in e.series){
-//                e.series[2].label.formatter.push(function(params){ return params === 0 ? '' : params;})
-//            }
-//            alert(e.series['2'].label.formatter);
-//            console.log(eval("("+e.series['2'].label.formatter+")"));
-//            e.series['2'].label.push({formatter: function(params){ return params === 0 ? '' : params;}});
-//            console.log(e.series);
+        if (e.status === 1) {
             myChart.setOption({
                 legend: {
                     data: e.legend_data
@@ -327,7 +319,25 @@ js('static\echart\echarts.min.js', 'public');
                 xAxis: {
                     data: e.xaxis_data
                 },
-                series: e.series
+                series: [
+                    e.series[0],
+                    e.series[1],
+//                    e.series[2]
+                    {
+                        name: e.series[2].name,
+                        type: e.series[2].type,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top',
+                                formatter: function (params) {
+                                    return params.data === 0 ? '' : params.data.replace(/.00/,'');
+                                }
+                            }
+                        },
+                        data: e.series[2].data
+                    }
+                ]
             });
         } else {
             alert(e.msg);
@@ -335,34 +345,70 @@ js('static\echart\echarts.min.js', 'public');
     };
     $.post(url, data, fun, type);
 </script>
-<!---->
-<!--<script type="text/javascript">-->
-<!--    // 基于准备好的dom，初始化echarts实例-->
-<!--    var myChart2 = echarts.init(document.getElementById('recent_month_3'));-->
-<!---->
-<!--    // 指定图表的配置项和数据-->
-<!--    var option2 = {-->
-<!--    title: {-->
-<!--    text: '示例'-->
-<!--    },-->
-<!--    tooltip: {},-->
-<!--    legend: {-->
-<!--    data:['销量']-->
-<!--    },-->
-<!--    xAxis: {-->
-<!--    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]-->
-<!--    },-->
-<!--    yAxis: {},-->
-<!--    series: [{-->
-<!--    name: '销量',-->
-<!--    type: 'bar',-->
-<!--    data: [5, 20, 36, 10, 10, 20]-->
-<!--    }]-->
-<!--    };-->
-<!---->
-<!--    // 使用刚指定的配置项和数据显示图表。-->
-<!--    myChart2.setOption(option2);-->
-<!--</script>-->
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart2 = echarts.init(document.getElementById('recent_month_3'));
+
+    // 指定图表的配置项和数据
+    var option2 = {
+    title: {
+//    text: '近三月消费一览'
+    },
+    tooltip: {},
+    legend: {
+    data:[]
+    },
+    xAxis: {
+    data: []
+    },
+    yAxis: {},
+    series: []
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart2.setOption(option2);
+
+    var url = '/account_api/index/getdatabytime';
+    var data = {gid:1,type:2};
+    var type = 'json';
+    myChart2.showLoading();
+    var fun = function (e) {
+        myChart2.hideLoading();
+        if (e.status === 1) {
+            myChart2.setOption({
+                legend: {
+                    data: e.legend_data
+                },
+                xAxis: {
+                    data: e.xaxis_data
+                },
+                series: [
+                    e.series[0],
+                    e.series[1],
+//                    e.series[2]
+                    {
+                        name: e.series[2].name,
+                        type: e.series[2].type,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: 'top',
+                                formatter: function (params) {
+                                    return params.data === 0 ? '' : params.data.replace(/.00/,'');
+                                }
+                            }
+                        },
+                        data: e.series[2].data
+                    }
+                ]
+            });
+        } else {
+            alert(e.msg);
+        }
+    };
+    $.post(url, data, fun, type);
+</script>
 <!---->
 <!--<script type="text/javascript">-->
 <!--    // 基于准备好的dom，初始化echarts实例-->
