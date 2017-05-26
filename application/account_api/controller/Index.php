@@ -157,6 +157,7 @@ class Index extends Controller implements BillStatistics
 
     /**
      * 按组查询每个成员的本月消费情况和总消费情况
+     * 最近3个月消费走势
      */
     public function getDataByTime(){
         $gid = input('post.gid',1);
@@ -218,10 +219,20 @@ class Index extends Controller implements BillStatistics
     }
 
     /**
-     * 最近3个月消费走势
+     * 最近消费时间轴
      */
-    public function getRecentThreeMonth(){
+    public function getTimeLineData(){
+        $gid = input('post.gid',1);
+        $page = input('post.page',1);
+        $size = input('post.size',10);
 
+        $rs = (new Bill())->getTimeLineData($gid,$page,$size);
+
+        if($rs){
+            return json(['msg'=>'获取成功','status'=>1,'rs'=>$rs]);
+        }else{
+            return json(['msg'=>'没有更多数据','status'=>0]);
+        }
     }
 }
 

@@ -74,4 +74,14 @@ class Bill extends Model
             return false;
         }
     }
+
+    // 按时间倒序获取最近消费
+    public function getTimeLineData($gid, $page, $size)
+    {
+        $rs = $this->field('id,buy_time,goods,amount,giver')
+            ->where('gid',$gid)
+            ->order('buy_time desc')
+            ->page($page,$size)
+            ->select();
+    }
 }
