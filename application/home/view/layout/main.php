@@ -21,6 +21,13 @@
         'home/count/index',
     ];
 
+    // 管理员中心
+    $ka_admin = [
+        'rbac/admin/lst',
+        'rbac/admin/add',
+        'rbac/admin/edit',
+    ];
+
     // Demos选项卡
     $ka_demos = [
         'home/demo/showtable',
@@ -31,6 +38,11 @@
     // AngularJs选项卡
     $ka_angular = [
         'home/angular/index',
+    ];
+
+    // AGT
+    $ka_agt = [
+        'agt/index/index',
     ];
 //dump($ka_demos);
 //dump($ka_route);
@@ -192,21 +204,16 @@
                     <div class="panel-heading down_up" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#collapseListGroup3" role="tab" >
                         <h4 class="panel-title">
                             管理员中心
-                            <span class="glyphicon glyphicon-chevron-down right"></span>
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_admin) ? 'up' : 'down'?> right"></span>
                         </h4>
                     </div>
-                    <div id="collapseListGroup3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                    <div id="collapseListGroup3" class="panel-collapse collapse <?=in_array($ka_route,$ka_admin) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项3-1
-                                </button>
-                            </li>
-                            <li class="list-group-item">
-                                <button class="menu-item-left">
-                                    <span class="glyphicon glyphicon-triangle-right"></span>分组项3-2
-                                </button>
-                            </li>
+                            <a href="{:url('rbac/admin/lst')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 管理员列表
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </div>
@@ -280,6 +287,24 @@
                             <a href="/home/angular/index">
                                 <li class="list-group-item">
                                     <span class="glyphicon glyphicon-triangle-right"></span> demo1
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary leftMenu">
+                    <div class="panel-heading down_up" id="collapseListGroupHeading2" data-toggle="collapse" data-target="#agt" role="tab" >
+                        <h4 class="panel-title">
+                            AGT
+                            <span class="glyphicon glyphicon-chevron-<?=in_array($ka_route,$ka_agt) ? 'up' : 'down'?> right"></span>
+                        </h4>
+                    </div>
+                    <div id="agt" class="panel-collapse collapse <?=in_array($ka_route,$ka_agt) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
+                        <ul class="list-group">
+                            <a href="{:url('agt/index/index')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 自动生成
                                 </li>
                             </a>
                         </ul>

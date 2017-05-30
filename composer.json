@@ -24,7 +24,8 @@
         "phpoffice/phpexcel": "^1.8",
         "mpdf/mpdf": "^6.1",
         "hisune/echarts-php": "^1.0",
-        "eonasdan/bootstrap-datetimepicker": "^4.17"
+        "eonasdan/bootstrap-datetimepicker": "^4.17",
+        "zouxiang0639/thinkcms-auth": "^1.1"
     },
     "extra": {
         "think-path": "thinkphp"

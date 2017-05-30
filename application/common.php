@@ -276,3 +276,21 @@ if (!function_exists('css')){
         }
     }
 }
+
+// 加密解密
+if(!function_exists('md6')){
+    function md6($str='',$de=false){
+        $key=('yourkey');
+        $char=('MDAwMDAwMDAwM');
+        if($str!=''){
+            if($de){
+                $str=$char.$str;
+                $str=think_decrypt($str,$key);
+            }else{
+                $str=think_encrypt($str,$key);
+                $str=str_replace($char, '',$str);
+            }
+        }
+        return $str;
+    }
+}

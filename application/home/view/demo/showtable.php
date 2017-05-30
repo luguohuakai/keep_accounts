@@ -1,9 +1,9 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">Panel_title</h3>
     </div>
     <div class="panel-body">
-        Panel content
+        Panel_content
     </div>
 </div>
 <!-- 响应式表格 -->
