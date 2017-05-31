@@ -19,14 +19,38 @@ class Index extends Controller implements BillStatistics
     public $this_month_10;
     // 上月10日 深夜
     public $last_month_10;
+    // 上月
+    public $last_month;
+    // 上上月
+    public $last_last_month;
 
     public function _initialize()
     {
         parent::_initialize();
-        $this->last_month_11 = strtotime(date('Y-m-11',strtotime("last month")));
-        $this->last_last_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
+        // 本年
+        $this_year = date('Y');
+        // 本月
+        $this_month = date('m');
+        if($this_month != 1){
+            $this->last_month_11 = strtotime($this_year . '-' . ($this_month - 1) . '-11');
+            $this->last_month_10 = strtotime($this_year . '-' . ($this_month - 1) . '-10 23:59:59');
+            $this->last_month = strtotime($this_year . '-' . ($this_month - 1));
+        }else{
+            $this->last_month_11 = strtotime(($this_year - 1) . '-12-11');
+            $this->last_month_10 = strtotime(($this_year - 1) . '-12-10 23:59:59');
+            $this->last_month = strtotime(($this_year - 1) . '-12');
+        }
+        if($this_month > 2){
+            $this->last_last_month_11 = strtotime($this_year . '-' . ($this_month - 2) . '-11');
+            $this->last_last_month = strtotime($this_year . '-' . ($this_month - 2));
+        }elseif ($this_month == 2){
+            $this->last_last_month_11 = strtotime(($this_year - 1) . '-12-11');
+            $this->last_last_month = strtotime(($this_year - 1) . '-12');
+        }elseif ($this_month == 1){
+            $this->last_last_month_11 = strtotime(($this_year - 1) . '-11-11');
+            $this->last_last_month = strtotime(($this_year - 1) . '-11');
+        }
         $this->this_month_10 = strtotime(date('Y-m')) + 10 * 24 * 60 * 60 - 1;
-        $this->last_month_10 = strtotime(date('Y-m-11',strtotime("last month"))) - 1;
     }
 
     public function index()
@@ -89,9 +113,9 @@ class Index extends Controller implements BillStatistics
         // 本月
         $year_month = date('Y-m');
         // 上月
-        $year_month_last = date('Y-m',strtotime('last month'));
+        $year_month_last = date('Y-m',$this->last_month);
         // 上上月
-        $year_month_last2 = date('Y-m',strtotime("-2 month"));
+        $year_month_last2 = date('Y-m',$this->last_last_month);
 
         $month_more = new MonthMore();
         $month = new Month();
@@ -100,16 +124,16 @@ class Index extends Controller implements BillStatistics
             // 本月 10 日时间戳
             $year_month_10 = strtotime($year_month) + 10 * 24 * 60 * 60 - 1;
             // 上月 11 日时间戳
-            $year_month_11 = strtotime(date('Y-m-11',strtotime("last month")));
+            $year_month_11 = $this->last_month_11;
             // 结算月
             $settlement_month = $year_month_last;
 
             $rs = $month_more->getMonthMore($gid,$settlement_month);
         }else{
             // 上月 10 日时间戳
-            $year_month_10 = strtotime(date('Y-m-11',strtotime("last month"))) - 1;
+            $year_month_10 = $this->last_month_10;
             // 上上月 11 日时间戳
-            $year_month_11 = strtotime(date('Y-m-11',strtotime("-2 month")));
+            $year_month_11 = $this->last_last_month_11;
             // 结算月
             $settlement_month = $year_month_last2;
 

@@ -19,7 +19,7 @@ class MonthMore extends Model
             ->where('gid',$gid)
             ->where('year_month',$year_month)
             ->field('id,year_month,create_time,total_amount,avg_amount,gid')
-            ->findOrFail();
+            ->find();
         if ($rs){
             $group = new Group();
             $rs['group_name'] =  $group->getFieldById($rs['gid'],'group_name');
