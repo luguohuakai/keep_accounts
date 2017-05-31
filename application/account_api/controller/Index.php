@@ -186,7 +186,7 @@ class Index extends Controller implements BillStatistics
                     'name' => $item['user_name'],
                     'type' => 'line',
                     'smooth' => true,
-                    'areaStyle' => ['normal' => []],
+//                    'areaStyle' => ['normal' => []],
                     'data' => $bill->getSeriesDataByUid($item['uid'],$gid,$start_time,$end_time)
                 ];
             }

@@ -72,7 +72,8 @@ class Index extends Controller
         $rs = $bill->insert($data);
 
         if($rs){
-            $this->redirect('/ac/lst');
+//            $this->redirect('/ac/lst');
+            $this->redirect('/ac/add');
 //            $this->success('新增成功','/ac/add');
         }else{
             $this->error('新增失败');

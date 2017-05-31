@@ -306,7 +306,7 @@ js('static\echart\echarts.min.js', 'public');
     myChart.setOption(option);
 
     var url = '/account_api/index/getdatabytime';
-    var data = {gid:1,type:1};
+    var data = {gid: 1, type: 1};
     var type = 'json';
     myChart.showLoading();
     var fun = function (e) {
@@ -325,13 +325,14 @@ js('static\echart\echarts.min.js', 'public');
 //                    e.series[2]
                     {
                         name: e.series[2].name,
-                        type: e.series[2].type,
+                        type: 'line',
+                        'areaStyle' : {'normal' : {}},
                         label: {
                             normal: {
                                 show: true,
                                 position: 'top',
                                 formatter: function (params) {
-                                    return params.data === 0 ? '' : params.data.replace(/.00/,'');
+                                    return params.data === 0 ? '' : params.data.replace(/.00/, '');
                                 }
                             }
                         },
@@ -352,25 +353,46 @@ js('static\echart\echarts.min.js', 'public');
 
     // 指定图表的配置项和数据
     var option2 = {
-    title: {
+        title: {
 //    text: '近三月消费一览'
-    },
-    tooltip: {},
-    legend: {
-    data:[]
-    },
-    xAxis: {
-    data: []
-    },
-    yAxis: {},
-    series: []
+        },
+        dataZoom: [
+            {   // 这个dataZoom组件，默认控制x轴。
+                type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
+                start: 70,      // 左边在 10% 的位置。
+                end: 100         // 右边在 60% 的位置。
+            },
+            {   // 这个dataZoom组件，也控制x轴。
+                type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
+                start: 70,      // 左边在 10% 的位置。
+                end: 100         // 右边在 60% 的位置。
+            }
+        ],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+//                type: 'cross',
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+//                label: {
+//                    backgroundColor: '#6a7985'
+//                }
+            }
+        },
+        legend: {
+            data: []
+        },
+        xAxis: {
+            data: []
+        },
+        yAxis: {},
+        series: []
     };
 
     // 使用刚指定的配置项和数据显示图表。
     myChart2.setOption(option2);
 
     var url = '/account_api/index/getdatabytime';
-    var data = {gid:1,type:2};
+    var data = {gid: 1, type: 2};
     var type = 'json';
     myChart2.showLoading();
     var fun = function (e) {
@@ -381,21 +403,53 @@ js('static\echart\echarts.min.js', 'public');
                     data: e.legend_data
                 },
                 xAxis: {
+                    axisLabel: {rotate: 30},
                     data: e.xaxis_data
                 },
                 series: [
-                    e.series[0],
-                    e.series[1],
+//                    e.series[0],
+//                    e.series[1],
 //                    e.series[2]
                     {
+                        name: e.series[0].name,
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'top',
+                                formatter: function (params) {
+                                    return params.data === 0 ? '' : params.data.replace(/.00/, '');
+                                }
+                            }
+                        },
+                        data: e.series[0].data
+                    },
+                    {
+                        name: e.series[1].name,
+                        type: 'bar',
+                        stack: '总量',
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'top',
+                                formatter: function (params) {
+                                    return params.data === 0 ? '' : params.data.replace(/.00/, '');
+                                }
+                            }
+                        },
+                        data: e.series[1].data
+                    },
+                    {
                         name: e.series[2].name,
-                        type: e.series[2].type,
+                        type: 'line',
+                        smooth: true,
                         label: {
                             normal: {
                                 show: true,
                                 position: 'top',
                                 formatter: function (params) {
-                                    return params.data === 0 ? '' : params.data.replace(/.00/,'');
+                                    return params.data === 0 ? '' : params.data.replace(/.00/, '');
                                 }
                             }
                         },

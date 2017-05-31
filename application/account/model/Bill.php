@@ -83,5 +83,20 @@ class Bill extends Model
             ->order('buy_time desc')
             ->page($page,$size)
             ->select();
+
+        if($rs){
+            $users = new Users();
+            $arr = [];
+            foreach ($rs as &$r) {
+                $d = date('Y-m-d',$r['buy_time']);
+                $r['buy_time'] = date('H : i : s',$r['buy_time']);
+                $r['user_name'] = $users->getFieldById($r['giver'],'user_name');
+                $arr[$d][] = $r;
+            }
+
+            return $arr;
+        }else{
+            return false;
+        }
     }
 }

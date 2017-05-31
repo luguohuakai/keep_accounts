@@ -12,6 +12,8 @@ js([
     'moment/moment/min/moment.min.js',
     'eonasdan/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
 ]);
+css('static/toastr/toastr.min.css', 'public');
+js('static/toastr/toastr.min.js', 'public');
 ?>
 
 <!-- 表单 -->
@@ -32,17 +34,17 @@ js([
                     <input type="text" class="form-control input-sm" id="amount" name="amount" placeholder="金额">
                 </div>
                 <div class="col-sm-2">
-<!--                    <input type="text" class="form-control input-sm" id="giver" name="giver" placeholder="谁掏的钱">-->
+                    <!--                    <input type="text" class="form-control input-sm" id="giver" name="giver" placeholder="谁掏的钱">-->
                     <select class="form-control input-sm" name="giver" id="giver" style="width: 100%;">
                         {volist name="rs" id="vo"}
-                            <option value="{$vo.uid}">{$vo.user_name}</option>
+                        <option value="{$vo.uid}">{$vo.user_name}</option>
                         {/volist}
                     </select>
                 </div>
                 <input type="hidden" name="gid" value="{$group_id}">
-<!--                <div class="col-sm-2">-->
-<!--                    <input type="text" class="form-control input-sm" id="exampleInputName2" name="" placeholder="Jane Doe">-->
-<!--                </div>-->
+                <!--                <div class="col-sm-2">-->
+                <!--                    <input type="text" class="form-control input-sm" id="exampleInputName2" name="" placeholder="Jane Doe">-->
+                <!--                </div>-->
                 <div class="col-sm-2">
                     <button type="submit" class="btn btn-default btn-sm">确定</button>
                 </div>
@@ -156,114 +158,27 @@ js([
         <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> 近期消费日志</h3>
     </div>
     <div class="panel-body">
-        <ul class="timeline">
-            <li><div class="tldate">Apr 2014</div></li>
+        <ul class="timeline" id="time_line">
 
-            <li>
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>Surprising Headline Right Here</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3 hours ago</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Lorem Ipsum and such.</p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="timeline-inverted">
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>Breaking into Spring!</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 4/07/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Hope the weather gets a bit nicer...</p>
-
-                        <p>Y'know, with more sunlight.</p>
-                    </div>
-                </div>
-            </li>
-
-            <li><div class="tldate">Mar 2014</div></li>
-
-            <li>
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>New Apple Device Release Date</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/22/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>In memory of Steve Jobs.</p>
-                    </div>
-                </div>
-            </li>
-            <li class="timeline-inverted">
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>No icon here</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/16/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Here you'll find some beautiful photography for your viewing pleasure, courtesy of <a href="http://lorempixel.com/">lorempixel</a>.</p>
-
-                        <p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493305964027&di=7faa9a856045b10d0a52e114fb5407fe&imgtype=0&src=http%3A%2F%2Fs2.sinaimg.cn%2Fmw690%2F44a2d702tdf6617d7e4c1%26690" alt="lorem pixel"></p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>Some Important Date!</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/03/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Write up a quick summary of the event.</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="timeline-panel noarrow">
-                    <div class="tl-heading">
-                        <h4>Secondary Timeline Box</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3/01/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>This might be a follow-up post with related info. Maybe we include some extra links, tweets, user comments, photos, etc.</p>
-                    </div>
-                </div>
-            </li>
-
-            <li><div class="tldate">Feb 2014</div></li>
-
-            <li class="timeline-inverted">
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>The Winter Months</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 02/23/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Gee time really flies when you're having fun.</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="tl-circ"></div>
-                <div class="timeline-panel">
-                    <div class="tl-heading">
-                        <h4>Yeah we're pretty much done here</h4>
-                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 02/11/2014</small></p>
-                    </div>
-                    <div class="tl-body">
-                        <p>Wasn't this fun though?</p>
-                    </div>
-                </div>
-            </li>
+<!--            <li>-->
+<!--                <div class="tldate">Apr 2014</div>-->
+<!--            </li>-->
+<!---->
+<!--            <li>-->
+<!--                <div class="tl-circ"></div>-->
+<!--                <div class="timeline-panel">-->
+<!--                    <div class="tl-heading">-->
+<!--                        <h4>Surprising Headline Right Here</h4>-->
+<!--                        <p>-->
+<!--                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> 3 hours ago</small>-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                    <div class="tl-body">-->
+<!--                        <p>Lorem Ipsum and such.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+            <li id="load_more_page"><div class="tldate"><a href="javascript:void(0);" style="color: snow;text-decoration: none" onclick="load_more(this)" id="load_more" data-next_page="2">加载更多</a></div></li>
         </ul>
     </div>
 </div>
@@ -277,4 +192,93 @@ js([
             defaultDate: 'now'
         });
     });
+</script>
+
+<!-- 时间轴 -->
+<script>
+    $(function () {
+        var str = '';
+        $.post(
+            '/account_api/index/gettimelinedata',
+            {},
+            function (e) {
+                if (e.status === 1) {
+                    var data = e.rs;
+                    var left_or_right = '';
+                    for (var k in data) {
+                        str += '<li><div class="tldate">' + k + '</div></li>';
+                        for (var j in data[k]) {
+                            str += '' +
+                                '<li class="'+left_or_right+'">' +
+                                '<div class="tl-circ"></div>' +
+                                '<div class="timeline-panel">' +
+                                '<div class="tl-heading">' +
+                                '<h4>'+data[k][j]["user_name"]+'</h4>' +
+                                '<p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> '+data[k][j]["buy_time"]+'</small></p>' +
+                                '</div>' +
+                                '<div class="tl-body">' +
+                                '<p>'+data[k][j]["goods"]+'</p>' +
+                                '<p style="color: #f40;"><span>¥ </span><strong>'+data[k][j]["amount"]+'</strong></p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
+                        }
+                        if(left_or_right !== ''){
+                            left_or_right = '';
+                        }else {
+                            left_or_right = 'timeline-inverted';
+                        }
+                    }
+                    $("#time_line").prepend(str);
+                } else {
+                    toastr.error(e.msg);
+                }
+            }, 'json'
+        )
+    });
+
+    // 加载更多
+    function load_more(obj) {
+        var next_page = $("#load_more").data('next_page');
+        var str = '';
+        $.post(
+            '/account_api/index/gettimelinedata',
+            {page:next_page},
+            function (e) {
+                if (e.status === 1) {
+                    var data = e.rs;
+                    var left_or_right = '';
+                    for (var k in data) {
+                        str += '<li><div class="tldate">' + k + '</div></li>';
+                        for (var j in data[k]) {
+                            str += '' +
+                                '<li class="'+left_or_right+'">' +
+                                '<div class="tl-circ"></div>' +
+                                '<div class="timeline-panel">' +
+                                '<div class="tl-heading">' +
+                                '<h4>'+data[k][j]["user_name"]+'</h4>' +
+                                '<p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> '+data[k][j]["buy_time"]+'</small></p>' +
+                                '</div>' +
+                                '<div class="tl-body">' +
+                                '<p>'+data[k][j]["goods"]+'</p>' +
+                                '<p style="color: #f40;"><span>¥ </span><strong>'+data[k][j]["amount"]+'</strong></p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
+                        }
+                        if(left_or_right !== ''){
+                            left_or_right = '';
+                        }else {
+                            left_or_right = 'timeline-inverted';
+                        }
+                    }
+                    $("#load_more_page").before(str);
+                    $("#load_more").data('next_page',++next_page)
+                } else {
+                    toastr.error(e.msg);
+                    $("#load_more").html(e.msg)
+                }
+            }, 'json'
+        )
+    }
 </script>
