@@ -4,7 +4,7 @@ namespace app\rbac\validate;
 
 use think\Validate;
 
-class Role extends Validate
+class Group extends Validate
 {
     protected $rule = [
                                                                     'name' => 'require|max:20',
@@ -18,10 +18,10 @@ class Role extends Validate
     ];
 
     protected $field = [
-            'id' => 'ID',
-            'name' => '角色名',
-            'status' => '状态 (1正常 2已删除)',
+            'id' => '权限组ID',
+            'name' => '组名',
             'create_time' => '创建时间',
             'update_time' => '更新时间',
+            'status' => '1正常 2删除',
         ];
 }

@@ -25,6 +25,16 @@ class Admin extends Model
 //        });
     }
 
+    public function getAllAdmin()
+    {
+        $rs = $this
+            ->field('id,name')
+            ->limit(1000)
+            ->select();
+
+        return $rs;
+    }
+
     protected function setPasswordAttr($value){
         if($value == self::getFieldById(input('post.id'),'password')){
             return $value;

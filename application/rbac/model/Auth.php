@@ -29,4 +29,14 @@ class Auth extends Model
             return false;
         }
     }
+
+    public function getAllAuth()
+    {
+        $rs = $this
+            ->field('id,name,group_id')
+            ->limit(1000)
+            ->select();
+
+        return $rs;
+    }
 }

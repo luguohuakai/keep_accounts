@@ -4,12 +4,12 @@ namespace app\rbac\controller;
 use think\Controller;
 use think\Loader;
 
-class Role extends Controller
+class Group extends Controller
 {
     // 列表 分页
     public function lst(){
-        $role = new \app\rbac\model\Role();
-        $lst = $role->getList();
+        $group = new \app\rbac\model\Group();
+        $lst = $group->getList();
         $this->assign('lst', $lst);
 
         return view('lst');
@@ -22,12 +22,12 @@ class Role extends Controller
 
     // 添加 操作
     public function add_handle(){
-        $validate = Loader::validate('Role');
+        $validate = Loader::validate('Group');
         if(!$validate->check($_POST)){
             $this->error($validate->getError());
         }
-        $role = new \app\rbac\model\Role($_POST);
-        $rs = $role->allowField(true)->save();
+        $group = new \app\rbac\model\Group($_POST);
+        $rs = $group->allowField(true)->save();
 
         if(FALSE !== $rs){
             $this->success('新增成功','add');
@@ -40,7 +40,7 @@ class Role extends Controller
     public function edit(){
         $id = input('param.id');
 
-        $rs = \app\rbac\model\Role::get($id);
+        $rs = \app\rbac\model\Group::get($id);
         $this->assign('rs',$rs);
 
         return view('edit');
@@ -48,8 +48,8 @@ class Role extends Controller
 
     // 修改 操作
     public function edit_handle(){
-        $role = new \app\rbac\model\Role();
-        $rs = $role->allowField(true)->save($_POST,['id' => $_POST['id']]);
+        $group = new \app\rbac\model\Group();
+        $rs = $group->allowField(true)->save($_POST,['id' => $_POST['id']]);
 
         if(FALSE !== $rs){
             $this->success('修改成功','lst');
@@ -62,8 +62,8 @@ class Role extends Controller
     public function del_soft(){
         $id = input('param.id');
 
-        $role = new \app\rbac\model\Role();
-        $rs = $role->save(['status' => 2],['id' => $id]);
+        $group = new \app\rbac\model\Group();
+        $rs = $group->save(['status' => 2],['id' => $id]);
 
         if(FALSE !== $rs){
             $this->success('删除成功','lst');
@@ -76,7 +76,7 @@ class Role extends Controller
     public function del_hard(){
         $id = input('param.id');
 
-        $rs = \app\rbac\model\Role::destroy($id);
+        $rs = \app\rbac\model\Group::destroy($id);
 
         if($rs){
             $this->success('删除成功','lst');

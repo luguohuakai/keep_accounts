@@ -1,7 +1,11 @@
 <?php
 namespace app\index\controller;
 
-class Index
+use think\Controller;
+use think\Request;
+use think\Response;
+
+class Index extends Controller
 {
     public function index()
     {
@@ -24,7 +28,61 @@ class Index
         </div>
         ';
     }
+
     public function test(){
         return view('index',['name'=>'maoge']);
+    }
+
+    // php代理 实现get post请求
+    public function proxy(){
+        $rs = [];
+        if(Request::instance()->isPost()){
+            $url = input('post.url');
+            $data = input('post.');
+
+            $rs = $this->post($url,$data);
+        }elseif (Request::instance()->isGet()){
+            $url = input('get.url');
+
+            $rs = $this->get($url);
+        }
+
+        return $rs;
+    }
+
+    // get
+    private function get($url){
+        //初始化
+        $ch = curl_init();
+
+        //设置选项，包括URL
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+        //执行并获取HTML文档内容
+        $output = curl_exec($ch);
+
+        //释放curl句柄
+        curl_close($ch);
+
+        return $output;
+    }
+
+    // post
+    private function post($url,$post_data){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // post数据
+        curl_setopt($ch, CURLOPT_POST, 1);
+        // post的变量
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        return $output;
     }
 }

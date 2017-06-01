@@ -26,6 +26,15 @@
         'rbac/admin/lst',
         'rbac/admin/add',
         'rbac/admin/edit',
+        'rbac/role/lst',
+        'rbac/role/add',
+        'rbac/role/edit',
+        'rbac/auth/lst',
+        'rbac/auth/add',
+        'rbac/auth/edit',
+        'rbac/group/lst',
+        'rbac/group/add',
+        'rbac/group/edit',
     ];
 
     // Demos选项卡
@@ -214,6 +223,21 @@
                                     <span class="glyphicon glyphicon-triangle-right"></span> 管理员列表
                                 </li>
                             </a>
+                            <a href="{:url('rbac/role/lst')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 角色列表
+                                </li>
+                            </a>
+                            <a href="{:url('rbac/auth/lst')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 权限列表
+                                </li>
+                            </a>
+                            <a href="{:url('rbac/group/lst')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 权限组列表
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </div>
@@ -304,7 +328,7 @@
                         <ul class="list-group">
                             <a href="{:url('agt/index/index')}">
                                 <li class="list-group-item">
-                                    <span class="glyphicon glyphicon-triangle-right"></span> 自动生成
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 自动生成(CURD)
                                 </li>
                             </a>
                         </ul>
