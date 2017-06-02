@@ -43,7 +43,7 @@ class Index
             return json($re);
         }else{
             $re['status'] = 0;
-            $re['msg'] = '为获取到相关数据';
+            $re['msg'] = '未获取到相关数据';
 
             return json($re);
         }
