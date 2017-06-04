@@ -41,3 +41,4 @@
     </div>
     <div class="panel-footer">{$lst->render()}</div>
 </div>
+

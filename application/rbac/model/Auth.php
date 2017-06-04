@@ -49,3 +49,4 @@ class Auth extends Model
         return $res;
     }
 }
+
