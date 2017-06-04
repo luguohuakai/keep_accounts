@@ -10,6 +10,7 @@ class Auth extends Validate
                                                                     'name' => 'require|max:20',
                                                                         'rule' => 'require|max:100',
                                                     'status' => 'number',
+                                                    'group_id' => 'number',
             ];
 
     protected $message = [
@@ -25,5 +26,6 @@ class Auth extends Validate
             'create_time' => '创建时间',
             'update_time' => '更新时间',
             'status' => '状态 (1正常 2已删除)',
+            'group_id' => '权限组ID',
         ];
 }

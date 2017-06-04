@@ -29,4 +29,14 @@ class Group extends Model
             return false;
         }
     }
+
+    public function getAllGroup()
+    {
+        $rs = $this
+            ->field('id,name')
+            ->limit(1000)
+            ->select();
+
+        return $rs;
+    }
 }

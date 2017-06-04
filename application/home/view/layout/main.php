@@ -35,6 +35,7 @@
         'rbac/group/lst',
         'rbac/group/add',
         'rbac/group/edit',
+        'rbac/index/index',
     ];
 
     // Demos选项卡
@@ -218,6 +219,11 @@
                     </div>
                     <div id="collapseListGroup3" class="panel-collapse collapse <?=in_array($ka_route,$ka_admin) ? 'in' : ''?>" role="tabpanel" aria-labelledby="collapseListGroupHeading2">
                         <ul class="list-group">
+                            <a href="{:url('rbac/index/index')}">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-triangle-right"></span> 权限查询
+                                </li>
+                            </a>
                             <a href="{:url('rbac/admin/lst')}">
                                 <li class="list-group-item">
                                     <span class="glyphicon glyphicon-triangle-right"></span> 管理员列表

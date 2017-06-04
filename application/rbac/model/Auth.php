@@ -20,7 +20,7 @@ class Auth extends Model
     public function getList()
     {
         $rs = $this
-            ->field('id,name,rule,create_time,update_time,status')
+            ->field('id,name,rule,create_time,update_time,status,group_id')
             ->order('create_time desc')
             ->paginate(10);
         if($rs){
@@ -33,10 +33,19 @@ class Auth extends Model
     public function getAllAuth()
     {
         $rs = $this
-            ->field('id,name,group_id')
+            ->alias('a')
+            ->join('sys_group b','a.group_id = b.id','left')
+            ->field('a.id,a.name,a.group_id,b.name as group_name')
             ->limit(1000)
             ->select();
 
-        return $rs;
+        $rs = collection($rs)->toArray();
+        $res = [];
+
+        foreach ($rs as $r) {
+            $res[$r['group_name']][] = $r;
+        }
+
+        return $res;
     }
 }

@@ -15,4 +15,18 @@ class RoleAuth extends Model
 
         return $rs;
     }
+
+    public function getAuthByRoleId($role_id)
+    {
+        $rs = $this
+            ->field('role_id,auth_id')
+            ->where('role_id',$role_id)
+            ->select();
+
+        if ($rs){
+            return $rs;
+        }else{
+            return false;
+        }
+    }
 }

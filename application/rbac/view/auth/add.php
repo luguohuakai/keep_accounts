@@ -7,40 +7,26 @@
         <form class="form-horizontal" method="post" action="{:url('add_handle')}">
 
             {:token()}
-                        <div class="form-group">
-                <label class="control-label col-sm-2" for="id">ID</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="id" name="id" style="">
-                </div>
-            </div>
-                        <div class="form-group">
+                                                                            <div class="form-group">
                 <label class="control-label col-sm-2" for="name">权限名称</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="name" name="name" style="">
                 </div>
             </div>
-                        <div class="form-group">
+                                        <div class="form-group">
                 <label class="control-label col-sm-2" for="rule">路由规则</label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="rule" name="rule" style="">
                 </div>
             </div>
-                        <div class="form-group">
-                <label class="control-label col-sm-2" for="create_time">创建时间</label>
+                                                                                                                                                    <div class="form-group">
+                <label class="control-label col-sm-2" for="group_id">权限组ID</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="create_time" name="create_time" style="">
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="control-label col-sm-2" for="update_time">更新时间</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="update_time" name="update_time" style="">
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="control-label col-sm-2" for="status">状态 (1正常 2已删除)</label>
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" id="status" name="status" style="">
+                    <select class="form-control" name="group_id" id="group_id">
+                        {volist name="rs" id="vo"}
+                        <option value="{$vo.id}">{$vo.name}</option>
+                        {/volist}
+                    </select>
                 </div>
             </div>
                         <div class="form-group">

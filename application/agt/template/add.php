@@ -11,6 +11,9 @@
 
             {:token()}
             <?php foreach ($rs_col_info as $rci):?>
+                <?php if($rci['Field'] == 'id' || $rci['Field'] == 'create_time' || $rci['Field'] == 'update_time' || $rci['Field'] == 'status'): ?>
+                    <?php continue; ?>
+                <?php endif;?>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="<?=$rci['Field']?>"><?=$rci['Comment']?></label>
                 <div class="col-sm-8">

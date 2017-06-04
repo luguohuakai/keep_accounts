@@ -15,6 +15,7 @@
                                         <th>创建时间</th>
                                         <th>更新时间</th>
                                         <th>状态 (1正常 2已删除)</th>
+                                        <th>权限组ID</th>
                                         <th>操作</th>
                 </tr>
                 </thead>
@@ -27,6 +28,7 @@
                                         <td>{$vo.create_time}</td>
                                         <td>{$vo.update_time}</td>
                                         <td>{$vo.status}</td>
+                                        <td>{$vo.group_id}</td>
                                         <td>
                         <a href="{:url('edit',['id' => $vo.id])}">修改</a>
                         <a href="{:url('del_soft',['id' => $vo.id])}">删除</a>

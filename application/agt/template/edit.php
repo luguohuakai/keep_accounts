@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2" for="<?=$rci['Field']?>"><?=$rci['Comment']?></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="<?=$rci['Field']?>" name="<?=$rci['Field']?>" value="{$rs.<?=$rci['Field']?>}" style="">
+                    <input type="text" class="form-control" <?php if($rci['Field'] == 'create_time' || $rci['Field'] == 'update_time'){echo 'disabled';}elseif($rci['Field'] == 'id'){echo 'readonly';}?> id="<?=$rci['Field']?>" name="<?=$rci['Field']?>" value="{$rs.<?=$rci['Field']?>}" style="">
                 </div>
             </div>
             <?php endforeach;?>

@@ -17,6 +17,9 @@ class Auth extends Controller
 
     // 添加 页面
     public function add(){
+        $rs = (new \app\rbac\model\Group())->getAllGroup();
+        $this->assign('rs',$rs);
+
         return view('add');
     }
 
@@ -38,6 +41,9 @@ class Auth extends Controller
 
     // 修改 页面
     public function edit(){
+        $rs_group = (new \app\rbac\model\Group())->getAllGroup();
+        $this->assign('rs_group',$rs_group);
+
         $id = input('param.id');
 
         $rs = \app\rbac\model\Auth::get($id);
