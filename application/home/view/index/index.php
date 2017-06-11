@@ -11,8 +11,20 @@ js('static\echart\echarts.min.js', 'public');
     <div class="col-lg-5">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> <span id="settlement_month">--</span>
-                    已结算</h3>
+                <h3 class="panel-title" style="display: inline-block;"><span class="glyphicon glyphicon-info-sign"></span> <span id="settlement_month">--</span>
+                    已结算
+                </h3>
+                <h3 class="panel-title navbar-right" style="display: inline-block;">
+                    <a tabindex="0"
+                       class="btn btn-xs"
+                       data-toggle="modal"
+                       data-target=".bs-example-modal-lg"
+                       onclick="this_month_preview()"
+                       role="button">
+                        <span class="glyphicon glyphicon-cloud-download"></span>
+                        本月预览
+                    </a>
+                </h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -33,26 +45,84 @@ js('static\echart\echarts.min.js', 'public');
         </div>
     </div>
 
+    <!-- Large modal -->
+    <div style="z-index: 999999999;margin-top: 5%" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="display: inline-block;">
+                        <span class="glyphicon glyphicon-cloud-download"></span>
+                        本月预览
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge" id="total_amount_this">--</span>
+                                    总消费
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge" id="difference_this">--</span>
+                                    平均
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function this_month_preview() {
+            if($('#total_amount_this').html() === '--'){
+                $.post(
+                    '/account_api/index/getThisMonth',
+                    {gid: 1},
+                    function (e) {
+                        var da = e.data;
+                        var u_sum = da.u_sum;
+                        $('#total_amount_this').html(da.sum);
+                        $('#difference_this').html(da.avg);
+                        var str = '';
+                        for (var k in u_sum) {
+                            str +=
+                                '<li class="list-group-item">' +
+                                '<sapn class="badge">应收 : ' + (u_sum[k][1]) + '</sapn>' +
+                                '<span class="badge">支出 : ' + u_sum[k][0] + '</span>' +
+                                k +
+                                '</li>';
+                        }
+                        $('#total_amount_this').parent().after(str);
+                    },'json'
+                )
+            }
+        }
+    </script>
+
     <script>
         $(function () {
             $.post(
                 '/account_api/index/autoClear',
                 {gid: 1},
                 function (e) {
-                    $('#settlement_month').html(e.data.month_more.year_month);
-                    $('#total_amount').html(e.data.month_more.total_amount);
+                    var month_more = e.data.month_more;
+                    $('#settlement_month').html(month_more.year_month);
+                    $('#total_amount').html(month_more.total_amount);
                     var month = e.data.month;
                     var str = '';
                     for (var k in month) {
                         str +=
                             '<li class="list-group-item">' +
-                            '<sapn class="badge">应收 : ' + (month[k].total_amount - e.data.month_more.avg_amount) + '</sapn>' +
+                            '<sapn class="badge">应收 : ' + (month[k].total_amount * 10000 - month_more.avg_amount * 10000) / 10000 + '</sapn>' +
                             '<span class="badge">支出 : ' + month[k].total_amount + '</span>' +
                             month[k].user_name +
                             '</li>';
                     }
                     $('#total_amount').parent().after(str);
-                    $('#difference').html(e.data.month_more.avg_amount)
+                    $('#difference').html(month_more.avg_amount)
 
                 }, 'json'
             )

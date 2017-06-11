@@ -99,4 +99,32 @@ class Bill extends Model
             return false;
         }
     }
+
+    /**
+     * 根据gid获取总消费
+     * @param $gid
+     * @param $start_time
+     * @param $end_time
+     * @return float|int
+     */
+    public function getSumByGid($gid, $start_time, $end_time)
+    {
+        $rs = $this
+            ->where('gid',$gid)
+            ->whereBetween('buy_time',[$start_time,$end_time])
+            ->sum('amount');
+
+        return $rs;
+    }
+
+    public function getSumByGidAndUid($gid, $uid, $start_time, $end_time)
+    {
+        $rs = $this
+            ->where('gid',$gid)
+            ->where('giver',$uid)
+            ->whereBetween('buy_time',[$start_time,$end_time])
+            ->sum('amount');
+
+        return $rs;
+    }
 }

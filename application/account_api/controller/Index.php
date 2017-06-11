@@ -8,6 +8,7 @@ use app\account\model\Month;
 use app\account\model\MonthMore;
 use app\common\Tools;
 use think\Controller;
+use think\Log;
 
 class Index extends Controller implements BillStatistics
 {
@@ -143,18 +144,23 @@ class Index extends Controller implements BillStatistics
         if(!$rs){
             // 开始自动结算
             $rs_auto = $month_more->autoClear($gid,$year_month_11,$year_month_10,$settlement_month);
+            // 获取 每人月数据
+            $rss = $month->getMonth($gid,$settlement_month);
             if($rs_auto){
                 $rs = $month_more->getMonthMore($gid,$settlement_month);
+                // 发送邮件
+                $this->autoSendEmail($gid,$year_month_11,$year_month_10,$settlement_month,$rs,$rss);
             }else{
                 $re['msg'] = '自动结算失败1';
                 $re['status'] = 0;
 
                 return json($re);
             }
+        }else{
+            // 获取 每人月数据
+            $rss = $month->getMonth($gid,$settlement_month);
         }
 
-        // 获取 每人月数据
-        $rss = $month->getMonth($gid,$settlement_month);
         if($rs and $rss){
             $re['msg'] = '获取成功';
             $re['status'] = 1;
@@ -167,6 +173,95 @@ class Index extends Controller implements BillStatistics
             $re['status'] = 0;
 
             return json($re);
+        }
+    }
+
+    // 发送邮件
+    private function autoSendEmail($gid,$year_month_11,$year_month_10,$settlement_month,$_rs,$_rss){
+        $start = date('Y-m-d',$year_month_11);
+        $end = date('Y-m-d',$year_month_10);
+        $total = $_rs['total_amount'];
+        $avg = $_rs['avg_amount'];
+
+        $str = '';
+        if($_rss){
+            foreach ($_rss as $rss) {
+                $user_name = $rss['user_name'];
+                $total_amount = $rss['total_amount'];
+                $diff = $total_amount - $avg;
+                $str = "<blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/103.png'>
+                    $user_name
+                    <br>
+                    <font size='2'>
+                        支出 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        <font size='2'>
+                        </font>
+                        ￥$total_amount
+                    </span>
+                    <br>
+                    <font size='2'>
+                        应收 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥$diff
+                    </span>
+                    <br>
+                </blockquote>";
+            }
+        }
+        $body = "<table style='width: 99.8%; '>
+    <tbody>
+        <tr>
+            <td id='QQMAILSTATIONERY' style='background:url(https://rescdn.qqmail.com/zh_CN/htmledition/images/xinzhi/bg/a_08.jpg) no-repeat #f3f3eb; min-height:550px; padding: 100px 55px 200px 120px;'>
+                <font size='5'>
+                    <span style='font-family: 楷体,楷体_GB2312;'>
+                        <span style='color: rgb(153, 51, 0);'>
+                            $settlement_month 已出账
+                        </span>
+                    </span>
+                </font>
+                <br>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <font size='2'>
+                        $start
+                        <br>
+                        $end
+                    </font>
+                    <br>
+                </blockquote>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/077.png'>
+                    总消费
+                    <br>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥$total
+                    </span>
+                    <br>
+                </blockquote>
+                $str
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/050.png'>
+                    平均
+                    <br>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥$avg
+                    </span>
+                    <br>
+                </blockquote>
+            </td>
+        </tr>
+    </tbody>
+</table>";
+        $users_group = new UsersGroup();
+        $rs_u = $users_group->getMembersByGroupId($gid,['email','user_name']);
+        if($rs_u){
+            foreach ($rs_u as $item) {
+                $rs = send_email($item['email'],$settlement_month . '生活账单',$body);
+                Log::record(print_r($rs,true) . "\r\n" . json_encode($item));
+            }
         }
     }
 
@@ -257,6 +352,47 @@ class Index extends Controller implements BillStatistics
         }else{
             return json(['msg'=>'没有更多数据','status'=>0]);
         }
+    }
+
+    /**
+     * 本月预览
+     */
+    public function getThisMonth(){
+        $gid = input('post.gid',1);
+        $this_year = date('Y');
+        $this_month = date('m');
+        $this_day = date('d');
+
+        $end_time = time();
+        if($this_day >= 11){
+            $start_time = $this->this_month_10 + 1;
+        }else{
+            $start_time = $this->last_month_11;
+        }
+
+        $users_group = new UsersGroup();
+        $bill = new Bill();
+        $rs_group = $users_group->getMembersByGroupId($gid);
+
+        // 根据gid获取总消费
+        $rs_sum = $bill->getSumByGid($gid,$start_time,$end_time);
+        // 计算平均消费
+        $rs_avg = $rs_sum / count($rs_group);
+        // 根据gid uid获取总消费
+        $rs_u_sum = [];
+        foreach ($rs_group as $item) {
+            $rs_u_sum_pre = $bill->getSumByGidAndUid($gid,$item['uid'],$start_time,$end_time);
+            $rs_u_sum[$item['user_name']][] = $rs_u_sum_pre;
+            $rs_u_sum[$item['user_name']][] = $rs_u_sum_pre - $rs_avg;
+        }
+
+        $re['msg'] = '获取成功';
+        $re['status'] = 1;
+        $re['data']['sum'] = $rs_sum;
+        $re['data']['avg'] = $rs_avg;
+        $re['data']['u_sum'] = $rs_u_sum;
+
+        return json($re);
     }
 }
 

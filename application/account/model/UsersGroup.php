@@ -14,12 +14,20 @@ use think\Model;
 class UsersGroup extends Model
 {
     // 根据group_id获取成员
-    public function getMembersByGroupId($group_id){
+    public function getMembersByGroupId($group_id,$from_user = []){
         $rs = $this->where('gid',$group_id)->field('gid,uid')->select();
         if($rs){
             $users = new Users();
-            foreach ($rs as &$r) {
-                $r['user_name'] = $users->getFieldById($r['uid'],'user_name');
+            if(empty($from_user)){
+                foreach ($rs as &$r) {
+                    $r['user_name'] = $users->getFieldById($r['uid'],'user_name');
+                }
+            }else{
+                foreach ($rs as &$r) {
+                    foreach ($from_user as $item) {
+                        $r[$item] = $users->getFieldById($r['uid'],$item);
+                    }
+                }
             }
 
             return $rs;

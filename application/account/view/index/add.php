@@ -208,6 +208,12 @@ js('static/toastr/toastr.min.js', 'public');
                     for (var k in data) {
                         str += '<li><div class="tldate">' + k + '</div></li>';
                         for (var j in data[k]) {
+                            // maoge在右bobo在左
+                            if(data[k][j]["user_name"] === 'maoge'){
+                                left_or_right = 'timeline-inverted';
+                            }else {
+                                left_or_right = '';
+                            }
                             str += '' +
                                 '<li class="'+left_or_right+'">' +
                                 '<div class="tl-circ"></div>' +
@@ -223,11 +229,11 @@ js('static/toastr/toastr.min.js', 'public');
                                 '</div>' +
                                 '</li>';
                         }
-                        if(left_or_right !== ''){
-                            left_or_right = '';
-                        }else {
-                            left_or_right = 'timeline-inverted';
-                        }
+//                        if(left_or_right !== ''){
+//                            left_or_right = '';
+//                        }else {
+//                            left_or_right = 'timeline-inverted';
+//                        }
                     }
                     $("#time_line").prepend(str);
                 } else {
@@ -251,6 +257,12 @@ js('static/toastr/toastr.min.js', 'public');
                     for (var k in data) {
                         str += '<li><div class="tldate">' + k + '</div></li>';
                         for (var j in data[k]) {
+                            // maoge在右bobo在左
+                            if(data[k][j]["user_name"] === 'maoge'){
+                                left_or_right = 'timeline-inverted';
+                            }else {
+                                left_or_right = '';
+                            }
                             str += '' +
                                 '<li class="'+left_or_right+'">' +
                                 '<div class="tl-circ"></div>' +
@@ -266,11 +278,11 @@ js('static/toastr/toastr.min.js', 'public');
                                 '</div>' +
                                 '</li>';
                         }
-                        if(left_or_right !== ''){
-                            left_or_right = '';
-                        }else {
-                            left_or_right = 'timeline-inverted';
-                        }
+//                        if(left_or_right !== ''){
+//                            left_or_right = '';
+//                        }else {
+//                            left_or_right = 'timeline-inverted';
+//                        }
                     }
                     $("#load_more_page").before(str);
                     $("#load_more").data('next_page',++next_page)

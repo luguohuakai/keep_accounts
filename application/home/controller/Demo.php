@@ -35,7 +35,88 @@ class Demo
     // 邮件发送
     public function sendEmail()
     {
-        $rs = send_email('1102313831@qq.com', 'maoge', '<h1>Hello</h1><h2 style="color: red;">你好</h2>');
+        $rs = send_email('769245396@qq.com', 'maoge', "<table style='width: 99.8%; '>
+    <tbody>
+        <tr>
+            <td id='QQMAILSTATIONERY' style='background:url(https://rescdn.qqmail.com/zh_CN/htmledition/images/xinzhi/bg/a_08.jpg) no-repeat #f3f3eb; min-height:550px; padding: 100px 55px 200px 120px;'>
+                <font size='5'>
+                    <span style='font-family: 楷体,楷体_GB2312;'>
+                        <span style='color: rgb(153, 51, 0);'>
+                            2017-05 已结算
+                        </span>
+                    </span>
+                </font>
+                <br>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <font size='2'>
+                        2016-09-12
+                        <br>
+                        2016-09-12
+                    </font>
+                    <br>
+                </blockquote>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/077.png'>
+                    总消费
+                    <br>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥456.60
+                    </span>
+                    <br>
+                </blockquote>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/103.png'>
+                    maoge
+                    <br>
+                    <font size='2'>
+                        支出 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        <font size='2'>
+                        </font>
+                        ￥372.50
+                    </span>
+                    <br>
+                    <font size='2'>
+                        应收 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥144.2
+                    </span>
+                    <br>
+                </blockquote>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/103.png'>
+                    maoge
+                    <br>
+                    <font size='2'>
+                        支出 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥372 .50
+                    </span>
+                    <br>
+                    <font size='2'>
+                        应收 :
+                    </font>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥144.2
+                    </span>
+                    <br>
+                </blockquote>
+                <blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                    <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/050.png'>
+                    平均
+                    <br>
+                    <span style='color: rgb(255, 0, 0);'>
+                        ￥228.3000
+                    </span>
+                    <br>
+                </blockquote>
+            </td>
+        </tr>
+    </tbody>
+</table>");
         dump($rs);
     }
 
