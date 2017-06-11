@@ -108,6 +108,7 @@ class Index extends Controller implements BillStatistics
      */
     public function autoClear(){
         $gid = input('post.gid');
+        $send_email = input('post.send_email');
 
         // 今天
         $today = date('d');
@@ -161,6 +162,11 @@ class Index extends Controller implements BillStatistics
             $rss = $month->getMonth($gid,$settlement_month);
         }
 
+        if($send_email){
+            // 手动发送邮件
+            $this->autoSendEmail($gid,$year_month_11,$year_month_10,$settlement_month,$rs,$rss);
+        }
+
         if($rs and $rss){
             $re['msg'] = '获取成功';
             $re['status'] = 1;
@@ -189,7 +195,7 @@ class Index extends Controller implements BillStatistics
                 $user_name = $rss['user_name'];
                 $total_amount = $rss['total_amount'];
                 $diff = $total_amount - $avg;
-                $str = "<blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
+                $str .= "<blockquote style='margin: 0.8em 0px 0.8em 2em; padding: 0px 0px 0px 0.7em; border-left: 2px solid rgb(221, 221, 221);' formatblock='1'>
                     <img src='https://rescdn.qqmail.com/zh_CN/images/mo/EMOJI/103.png'>
                     $user_name
                     <br>
@@ -216,7 +222,7 @@ class Index extends Controller implements BillStatistics
     <tbody>
         <tr>
             <td id='QQMAILSTATIONERY' style='background:url(https://rescdn.qqmail.com/zh_CN/htmledition/images/xinzhi/bg/a_08.jpg) no-repeat #f3f3eb; min-height:550px; padding: 100px 55px 200px 120px;'>
-                <font size='5'>
+                <font size='4'>
                     <span style='font-family: 楷体,楷体_GB2312;'>
                         <span style='color: rgb(153, 51, 0);'>
                             $settlement_month 已出账

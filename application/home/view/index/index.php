@@ -11,8 +11,27 @@ js('static\echart\echarts.min.js', 'public');
     <div class="col-lg-5">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title" style="display: inline-block;"><span class="glyphicon glyphicon-info-sign"></span> <span id="settlement_month">--</span>
+                <h3 class="panel-title" style="display: inline-block;"><span
+                            class="glyphicon glyphicon-info-sign"></span> <span id="settlement_month">--</span>
                     已结算
+                </h3>
+                <h3 class="panel-title navbar-right" style="display: inline-block;">
+                    <a tabindex="1"
+                       class="btn btn-xs"
+                       onclick="function send_email(obj) {
+                        $.post(
+                            '/account_api/index/autoClear',
+                            {gid: 1,send_email:1},
+                            function (e) {
+                                alert('已发送');
+                                $(obj).attr('onclick','javascript:void(alert('+'\'请勿重复发送\''+'))');
+                            },'json')
+                       }
+                       send_email(this)"
+                       role="button">
+                        <span class="glyphicon glyphicon-send"></span>
+                        发送邮件
+                    </a>
                 </h3>
                 <h3 class="panel-title navbar-right" style="display: inline-block;">
                     <a tabindex="0"
@@ -46,7 +65,8 @@ js('static\echart\echarts.min.js', 'public');
     </div>
 
     <!-- Large modal -->
-    <div style="z-index: 999999999;margin-top: 5%" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div style="z-index: 999999999;margin-top: 5%" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -77,7 +97,7 @@ js('static\echart\echarts.min.js', 'public');
 
     <script>
         function this_month_preview() {
-            if($('#total_amount_this').html() === '--'){
+            if ($('#total_amount_this').html() === '--') {
                 $.post(
                     '/account_api/index/getThisMonth',
                     {gid: 1},
@@ -96,7 +116,7 @@ js('static\echart\echarts.min.js', 'public');
                                 '</li>';
                         }
                         $('#total_amount_this').parent().after(str);
-                    },'json'
+                    }, 'json'
                 )
             }
         }
@@ -396,7 +416,7 @@ js('static\echart\echarts.min.js', 'public');
                     {
                         name: e.series[2].name,
                         type: 'line',
-                        'areaStyle' : {'normal' : {}},
+                        'areaStyle': {'normal': {}},
                         label: {
                             normal: {
                                 show: true,
@@ -442,7 +462,7 @@ js('static\echart\echarts.min.js', 'public');
             trigger: 'axis',
             axisPointer: {
 //                type: 'cross',
-                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
 //                label: {
 //                    backgroundColor: '#6a7985'
 //                }
