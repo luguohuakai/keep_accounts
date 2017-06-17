@@ -251,6 +251,25 @@ class Demo
         //$objWriter->setImagesRoot('http://www.example.com');
         $objWriter->save(str_replace('.php', '.htm', __FILE__));//保存文件
     }
+    
+    // 测试接口
+    public function toolTips(){
+        sleep(1);
+        $re['msg'] = '加载成功';
+        $re['status'] = 1;
+        $re['data'] = '
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Panel_title</h3>
+    </div>
+    <div class="panel-body">
+        Panel_content
+    </div>
+</div>
+        ';
+
+        return json($re);
+    }
 }
 
 
